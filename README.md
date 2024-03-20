@@ -39,6 +39,7 @@ output: data/dataset/training_node.csv, data/dataset/training_net.csv, data/data
 
 ### Trainning the DyTGNets model to construct dynamic TF-Gene networks
 `main.py`: Trainning or using the DyTGNets model to construct dynamic TF-Gene networks.
+
 input: data/dataset/training_node.csv, data/dataset/training_net.csv, data/dataset/mapping.csv
 
 output: out/dataset/factor_link, out/dataset/model, out/dataset/permutation
