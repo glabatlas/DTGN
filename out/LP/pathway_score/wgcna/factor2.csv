@@ -1,0 +1,548 @@
+term,,,adj_p_value
+Metabolic pathways,,,2.14E-37
+RNA transport,,,4.02E-17
+"Ribosome, eukaryotes",,,1.67E-14
+Nucleocytoplasmic transport,,,5.26E-13
+Coronavirus disease - COVID-19,,,8.46E-13
+Ribosome,,,4.90E-12
+Amyotrophic lateral sclerosis,,,6.15E-12
+Non-alcoholic fatty liver disease (NAFLD),,,4.35E-11
+Non-alcoholic fatty liver disease,,,1.18E-10
+Biosynthesis of cofactors,,,1.81E-10
+Chemical carcinogenesis - reactive oxygen species,,,2.58E-10
+Huntington's disease,,,3.62E-10
+Cell cycle,,,3.97E-10
+Basal transcription factors,,,2.02E-09
+Huntington disease,,,2.02E-09
+mRNA surveillance pathway,,,2.49E-09
+Prion disease,,,3.97E-09
+Autophagy - animal,,,5.20E-09
+Spliceosome,,,5.20E-09
+Adherens junction,,,9.05E-09
+Alzheimer's disease,,,1.14E-08
+DNA replication,,,1.14E-08
+Drug metabolism - other enzymes,,,1.66E-08
+Pyrimidine metabolism,,,1.66E-08
+"Spliceosome, U2-snRNP",,,2.36E-08
+Parkinson disease,,,2.90E-08
+Tight junction,,,3.74E-08
+Alcoholic liver disease,,,4.15E-08
+Parkinson's disease,,,4.50E-08
+Complement and coagulation cascades,,,1.31E-07
+Polycomb repressive complex,,,1.32E-07
+Salmonella infection,,,1.38E-07
+Nucleotide excision repair,,,1.69E-07
+Ubiquitin mediated proteolysis,,,1.84E-07
+Nuclear pore complex,,,3.29E-07
+Mismatch repair,,,1.24E-06
+Alzheimer disease,,,1.34E-06
+Cholesterol metabolism,,,1.61E-06
+Diabetic cardiomyopathy,,,2.07E-06
+Thyroid hormone signaling pathway,,,2.27E-06
+Carbon metabolism,,,2.64E-06
+Hepatitis C,,,3.03E-06
+Longevity regulating pathway,,,5.19E-06
+Thermogenesis,,,6.45E-06
+Peroxisome,,,1.26E-05
+Viral carcinogenesis,,,1.26E-05
+Ferroptosis,,,1.45E-05
+Holo-TFIIH complex,,,1.75E-05
+Platinum drug resistance,,,1.75E-05
+Insulin resistance,,,1.80E-05
+"Valine, leucine and isoleucine degradation",,,1.80E-05
+Pathways of neurodegeneration - multiple diseases,,,1.83E-05
+"Spliceosome, 35S U5-snRNP",,,2.42E-05
+Oxidative phosphorylation,,,2.43E-05
+Hepatitis B,,,2.59E-05
+Insulin signaling pathway,,,2.86E-05
+Citrate cycle (TCA cycle),,,3.31E-05
+Propanoate metabolism,,,3.34E-05
+Sphingolipid signaling pathway,,,4.01E-05
+Pyruvate metabolism,,,4.02E-05
+Endocytosis,,,4.13E-05
+Proteasome,,,5.38E-05
+"Citrate cycle (TCA cycle, Krebs cycle)",,,5.58E-05
+Pathways in cancer,,,5.65E-05
+Human T-cell leukemia virus 1 infection,,,5.78E-05
+"Glycine, serine and threonine metabolism",,,5.90E-05
+Biosynthesis of amino acids,,,6.37E-05
+Spinocerebellar ataxia,,,6.93E-05
+"Aminoacyl-tRNA biosynthesis, eukaryotes",,,7.14E-05
+Herpes simplex infection,,,0.000101747
+Drug metabolism - cytochrome P450,,,0.000107921
+Apoptosis,,,0.00010816
+Autophagy - other,,,0.00012947
+Glyoxylate and dicarboxylate metabolism,,,0.00012947
+"Spliceosome, U4/U6.U5 tri-snRNP",,,0.00012947
+Yersinia infection,,,0.00013156
+Lysosome,,,0.000168988
+Mitophagy - animal,,,0.000168988
+Hepatocellular carcinoma,,,0.000263285
+TGF-beta signaling pathway,,,0.000309263
+Chemical carcinogenesis - DNA adducts,,,0.000367446
+2-Oxocarboxylic acid metabolism,,,0.000403904
+Pancreatic cancer,,,0.000403904
+Prion diseases,,,0.000403904
+AMPK signaling pathway,,,0.000411806
+"Citrate cycle, second carbon oxidation, 2-oxoglutarate => oxaloacetate",,,0.000421456
+Protein processing in endoplasmic reticulum,,,0.00043893
+Glutathione metabolism,,,0.000502594
+ATP-dependent chromatin remodeling,,,0.000635711
+Purine metabolism,,,0.000635711
+Viral life cycle - HIV-1,,,0.000635711
+Nucleotide metabolism,,,0.00079728
+Bacterial invasion of epithelial cells,,,0.000911086
+Chronic myeloid leukemia,,,0.000911086
+"GABA biosynthesis, eukaryotes, putrescine => GABA",,,0.000911086
+Tryptophan metabolism,,,0.000927843
+EGFR tyrosine kinase inhibitor resistance,,,0.000938521
+"Alanine, aspartate and glutamate metabolism",,,0.000982012
+"NADH dehydrogenase (ubiquinone) Fe-S protein/flavoprotein complex, mitochondria",,,0.001056721
+"Spliceosome, U1-snRNP",,,0.001056721
+Exon junction complex (EJC),,,0.001373746
+Chemical carcinogenesis - receptor activation,,,0.001444766
+Fluid shear stress and atherosclerosis,,,0.001639528
+Fatty acid degradation,,,0.001647209
+"Inosine monophosphate biosynthesis, PRPP + glutamine => IMP",,,0.001667627
+MCM complex,,,0.001667627
+PPAR signaling pathway,,,0.001667627
+RNA degradation,,,0.001667627
+Immunoproteasome,,,0.001898275
+Selenocompound metabolism,,,0.001898275
+Longevity regulating pathway - multiple species,,,0.001991209
+FoxO signaling pathway,,,0.002023181
+Cellular senescence,,,0.0020391
+Bile secretion,,,0.002109411
+TNF signaling pathway,,,0.002109411
+BRCA1-associated genome surveillance complex (BASC),,,0.002149259
+Biosynthesis of nucleotide sugars,,,0.002235784
+APC/C complex,,,0.002428308
+Sm core complex,,,0.002428308
+eIF4F complex,,,0.002428308
+Cytochrome bc1 complex,,,0.002716572
+Lysine degradation,,,0.003614778
+Acute myeloid leukemia,,,0.003711464
+AGE-RAGE signaling pathway in diabetic complications,,,0.005095999
+Pantothenate and CoA biosynthesis,,,0.005095999
+Progesterone-mediated oocyte maturation,,,0.005143862
+RF-C complex,,,0.005400266
+Apelin signaling pathway,,,0.005613258
+Regulation of actin cytoskeleton,,,0.005914746
+Efferocytosis,,,0.006049829
+Metabolism of xenobiotics by cytochrome P450,,,0.006181594
+Steroid hormone biosynthesis,,,0.006181594
+HTLV-I infection,,,0.006507877
+ESCRT-III complex,,,0.006810869
+"Lysine degradation, lysine => saccharopine => acetoacetyl-CoA",,,0.006810869
+Methionine salvage pathway,,,0.006810869
+Human papillomavirus infection,,,0.006830284
+Fatty acid metabolism,,,0.007252815
+Retinol metabolism,,,0.007366213
+Colorectal cancer,,,0.00739014
+Histidine metabolism,,,0.00739014
+PD-L1 expression and PD-1 checkpoint pathway in cancer,,,0.00739014
+Primary bile acid biosynthesis,,,0.00739014
+Human cytomegalovirus infection,,,0.007713198
+Choline metabolism in cancer,,,0.0088021
+Renal cell carcinoma,,,0.009186612
+"Growth hormone synthesis, secretion and action",,,0.009379996
+Focal adhesion,,,0.009627749
+Glucagon signaling pathway,,,0.009955344
+beta-Alanine metabolism,,,0.010543235
+Antifolate resistance,,,0.010805921
+Cysteine and methionine metabolism,,,0.010805921
+Proteoglycans in cancer,,,0.010805921
+Non-small cell lung cancer,,,0.01133276
+Influenza A,,,0.011774608
+Lipoic acid metabolism,,,0.012131991
+"Proteasome, 19S regulatory particle (PA700)",,,0.012131991
+Ribosome biogenesis in eukaryotes,,,0.012131991
+Amino sugar and nucleotide sugar metabolism,,,0.013125914
+Epstein-Barr virus infection,,,0.013125914
+Hippo signaling pathway,,,0.013730492
+Adipocytokine signaling pathway,,,0.013765744
+Oocyte meiosis,,,0.014370341
+Chagas disease (American trypanosomiasis),,,0.014509793
+Succinate dehydrogenase (ubiquinone),,,0.015728698
+TREX complex,,,0.015728698
+Lipid and atherosclerosis,,,0.017671508
+Prostate cancer,,,0.017699855
+Biosynthesis of unsaturated fatty acids,,,0.017721719
+RNA polymerase,,,0.017721719
+Riboflavin metabolism,,,0.017742115
+"Malonate semialdehyde pathway, propanoyl-CoA => acetyl-CoA",,,0.018368481
+NOD-like receptor signaling pathway,,,0.018368481
+Origin recognition complex,,,0.018368481
+Urea cycle,,,0.018368481
+Arginine biosynthesis,,,0.018500749
+Toll-like receptor signaling,,,0.018573936
+Nicotinate and nicotinamide metabolism,,,0.019540419
+Chagas disease,,,0.019542908
+Ascorbate and aldarate metabolism,,,0.020495379
+Fc gamma R-mediated phagocytosis,,,0.020495379
+Relaxin signaling pathway,,,0.020742987
+Necroptosis,,,0.0213178
+cGMP-PKG signaling pathway,,,0.0213178
+"Propanoyl-CoA metabolism, propanoyl-CoA => succinyl-CoA",,,0.02134331
+"Leucine degradation, leucine => acetoacetate + acetyl-CoA",,,0.023029706
+beta-Oxidation,,,0.023029706
+Folate biosynthesis,,,0.023883611
+Inositol phosphate metabolism,,,0.023913214
+Base excision repair,,,0.025010526
+Endometrial cancer,,,0.025098147
+"Parathyroid hormone synthesis, secretion and action",,,0.025431759
+Leukocyte transendothelial migration,,,0.025893001
+Pertussis,,,0.028216518
+COPII complex,,,0.02827685
+"Pyrimidine ribonucleotide biosynthesis, UMP => UDP/UTP,CDP/CTP",,,0.02827685
+Ubiquinone and other terpenoid-quinone biosynthesis,,,0.02827685
+NADH dehydrogenase (ubiquinone) 1 alpha subcomplex,,,0.029115291
+Small cell lung cancer,,,0.029115291
+mTOR signaling pathway,,,0.029115291
+Measles,,,0.02970765
+Porphyrin and chlorophyll metabolism,,,0.02970765
+Platelet activation,,,0.032469897
+One carbon pool by folate,,,0.034529887
+Survival motor neuron (SMN) complex,,,0.034529887
+Th17 cell differentiation,,,0.034529887
+Toll-like receptor signaling pathway,,,0.035660389
+NF-kappa B signaling pathway,,,0.037073823
+Sulfur metabolism,,,0.037073823
+Arginine and proline metabolism,,,0.037192804
+Proximal tubule bicarbonate reclamation,,,0.038160444
+"C5 isoprenoid biosynthesis, mevalonate pathway",,,0.039065301
+Synthesis and degradation of ketone bodies,,,0.039065301
+Cytochrome c oxidase,,,0.041554164
+Glycolysis / Gluconeogenesis,,,0.041554164
+Human immunodeficiency virus 1 infection,,,0.041554164
+Butanoate metabolism,,,0.043568535
+Glycerophospholipid metabolism,,,0.043568535
+"F-type ATPase, eukaryotes",,,0.043740494
+"Pyrimidine degradation, uracil => beta-alanine, thymine => 3-aminoisobutanoate",,,0.045583974
+RPA complex,,,0.045583974
+Circadian rhythm,,,0.046832159
+THC complex,,,0.046870385
+Thyroid hormone synthesis,,,0.047084131
+p53 signaling pathway,,,0.047084131
+Dorso-ventral axis formation,,,0.056001441
+Hippo signaling,,,0.056742625
+"Proteasome, 20S core particle",,,0.056742625
+Fatty acid elongation,,,0.05741385
+Bladder cancer,,,0.058670961
+Central carbon metabolism in cancer,,,0.058670961
+Neurotrophin signaling pathway,,,0.058670961
+Tyrosine metabolism,,,0.058670961
+"Citrate cycle, first carbon oxidation, oxaloacetate => 2-oxoglutarate",,,0.05943681
+"Exosome, eukaryotes",,,0.05943681
+"RNA polymerase III, eukaryotes",,,0.062498392
+Legionellosis,,,0.063486076
+RIG-I-like receptor signaling pathway,,,0.066585284
+Toxoplasmosis,,,0.067476247
+"Ascorbate biosynthesis, animals, glucose-1P => ascorbate",,,0.070394219
+HRD1/SEL1 ERAD complex,,,0.072841226
+Starch and sucrose metabolism,,,0.073561814
+Terpenoid backbone biosynthesis,,,0.076476866
+MAPK (ERK1/2) signaling,,,0.076480753
+TGF-beta signaling,,,0.076480753
+Prolactin signaling pathway,,,0.076991015
+Aldosterone-regulated sodium reabsorption,,,0.07752923
+Fat digestion and absorption,,,0.07752923
+Porphyrin metabolism,,,0.07752923
+Dilated cardiomyopathy,,,0.077544071
+Endocrine resistance,,,0.077544071
+Glioma,,,0.077544071
+Hypertrophic cardiomyopathy,,,0.077544071
+Hypertrophic cardiomyopathy (HCM),,,0.077544071
+Long-term depression,,,0.077544071
+Melanoma,,,0.077544071
+Ovarian steroidogenesis,,,0.077544071
+Kaposi sarcoma-associated herpesvirus infection,,,0.080973844
+Dopaminergic synapse,,,0.08704142
+JAK-STAT signaling,,,0.087145849
+Axon guidance,,,0.091011908
+Pentose and glucuronate interconversions,,,0.091011908
+Thyroid cancer,,,0.091011908
+HIF-1 signaling pathway,,,0.091183269
+Pentose phosphate pathway,,,0.091606477
+Inflammatory mediator regulation of TRP channels,,,0.091873129
+MAPK signaling pathway,,,0.093045903
+PI3K-Akt signaling pathway,,,0.09500438
+Signaling pathways regulating pluripotency of stem cells,,,0.095037155
+Caffeine metabolism,,,0.096099944
+Cul4-DDB1-DDB2 complex,,,0.096099944
+Decapping complex,,,0.096099944
+"Fatty acid biosynthesis, elongation, mitochondria",,,0.096099944
+Breast cancer,,,0.096837303
+Phospholipase D signaling pathway,,,0.10171743
+Gap junction,,,0.102326643
+Osteoclast differentiation,,,0.103741943
+Vasopressin-regulated water reabsorption,,,0.103881492
+Cytosolic DNA-sensing pathway,,,0.110802318
+"Adenine ribonucleotide biosynthesis, IMP => ADP,ATP",,,0.114933384
+Glucuronate pathway (uronate pathway),,,0.116471891
+Cocaine addiction,,,0.119090797
+DNA polymerase alpha / primase complex,,,0.119090797
+DNA polymerase delta complex,,,0.119090797
+"Galactose degradation, Leloir pathway, galactose => alpha-D-glucose-1P",,,0.119090797
+H/ACA ribonucleoprotein complex,,,0.119090797
+"Nucleotide sugar biosynthesis, eukaryotes",,,0.120827424
+Vitamin B6 metabolism,,,0.120827424
+Tuberculosis,,,0.122528353
+Rap1 signaling pathway,,,0.127666097
+Transcriptional misregulation in cancer,,,0.128524669
+ABC transporters,,,0.134888957
+Apoptosis - multiple species,,,0.135040579
+Cap binding complex,,,0.135040579
+"Conjugated bile acid biosynthesis, cholate => taurocholate/glycocholate",,,0.135040579
+"Cysteine biosynthesis, homocysteine + serine => cysteine",,,0.135040579
+"Fatty acid biosynthesis, elongation",,,0.135040579
+"Guanine ribonucleotide biosynthesis IMP => GDP,GTP",,,0.135040579
+Lysine biosynthesis,,,0.135040579
+SNARE interactions in vesicular transport,,,0.135040579
+Ras signaling pathway,,,0.135710077
+Cortisol synthesis and secretion,,,0.136711975
+Maturity onset diabetes of the young,,,0.140621649
+Phenylalanine metabolism,,,0.141947647
+Vitamin digestion and absorption,,,0.141947647
+mmuK signaling pathway,,,0.146263778
+"RNA polymerase I, eukaryotes",,,0.153340409
+"Coenzyme A biosynthesis, pantothenate => CoA",,,0.156134999
+Lsm 1-7 complex,,,0.156134999
+Lsm 2-8 complex,,,0.156134999
+"Phosphatidylethanolamine (PE) biosynthesis, ethanolamine => PE",,,0.156134999
+Shelterin complex,,,0.156134999
+Linoleic acid metabolism,,,0.156364012
+Galactose metabolism,,,0.160124887
+Long-term potentiation,,,0.165403589
+Protein export,,,0.165403589
+T cell receptor signaling pathway,,,0.165403589
+Activin signaling,,,0.172676071
+BER complex,,,0.172676071
+Taurine and hypotaurine metabolism,,,0.178203871
+Non-homologous end-joining,,,0.178719224
+PI3K-Akt signaling,,,0.178719224
+"Spliceosome, Prp19/CDC5L complex",,,0.178719224
+Fructose and mannose metabolism,,,0.181038273
+Phosphatidylinositol signaling system,,,0.190938533
+Nitrogen metabolism,,,0.200608552
+ErbB signaling pathway,,,0.206851434
+Cul3-SPOP complex,,,0.207495507
+"Pyruvate oxidation, pyruvate => acetyl-CoA",,,0.207495507
+"Ubiquinone biosynthesis, eukaryotes, 4-hydroxybenzoate => ubiquinone",,,0.207495507
+Amyotrophic lateral sclerosis (ALS),,,0.217190803
+"Gluconeogenesis, oxaloacetate => fructose-6P",,,0.217190803
+IL-17 signaling pathway,,,0.217190803
+MAPK (p38) signaling,,,0.22425471
+BMP signaling,,,0.226532691
+Notch signaling pathway,,,0.228588676
+Sulfur relay system,,,0.230696523
+"Tyrosine degradation, tyrosine => homogentisate",,,0.230696523
+Leishmaniasis,,,0.231391628
+Aminoacyl-tRNA biosynthesis,,,0.236685209
+Serotonergic synapse,,,0.236685209
+Cushing syndrome,,,0.248653845
+Ski complex,,,0.250630086
+Glycerolipid metabolism,,,0.254020187
+C-type lectin receptor signaling pathway,,,0.258187852
+Vascular smooth muscle contraction,,,0.262962964
+Biotin metabolism,,,0.280118185
+Cytochrome bc1 complex respiratory unit,,,0.280118185
+DNA-PK complex,,,0.280118185
+ESCRT-0 complex,,,0.280118185
+"Glutathione biosynthesis, glutamate => glutathione",,,0.280118185
+"Inositol phosphate metabolism, Ins(1,3,4)P3 => phytate",,,0.280118185
+MRN complex,,,0.280118185
+Sphingosine degradation,,,0.280118185
+"Uridine monophosphate biosynthesis, glutamine (+ PRPP) => UMP",,,0.280118185
+p97-Ufd1-Npl4 complex,,,0.280118185
+"Polyamine biosynthesis, arginine => ornithine => putrescine",,,0.282509415
+"Valine, leucine and isoleucine biosynthesis",,,0.282509415
+Amphetamine addiction,,,0.290042406
+"C1-unit interconversion, eukaryotes",,,0.304944301
+Cul4-DDB1-CSA complex,,,0.304944301
+D-Amino acid metabolism,,,0.304944301
+"Inositol phosphate metabolism, Ins(1,3,4,5)P4 => Ins(1,3,4)P3 => myo-inositol",,,0.304944301
+"Phenylalanine, tyrosine and tryptophan biosynthesis",,,0.304944301
+"Phosphatidylcholine (PC) biosynthesis, choline => PC",,,0.304944301
+Phosphonate and phosphinate metabolism,,,0.304944301
+Homologous recombination,,,0.306479965
+Estrogen signaling pathway,,,0.315811603
+Arachidonic acid metabolism,,,0.322373975
+"C21-Steroid hormone biosynthesis, progesterone => cortisol/cortisone",,,0.326720546
+Primary immunodeficiency,,,0.326720546
+African trypanosomiasis,,,0.328374656
+Rheumatoid arthritis,,,0.328374656
+Th1 and Th2 cell differentiation,,,0.33450438
+Regulation of lipolysis in adipocytes,,,0.34691869
+Sphingolipid metabolism,,,0.34691869
+Hippo signaling pathway -multiple species,,,0.350729053
+Amoebiasis,,,0.353144711
+Cell cycle - G1/S transition,,,0.368151441
+"Fatty acid biosynthesis, elongation, endoplasmic reticulum",,,0.368151441
+"RNA polymerase II, eukaryotes",,,0.368151441
+VEGF signaling pathway,,,0.377912508
+Fatty acid biosynthesis,,,0.39189768
+Hippo signaling pathway - multiple species,,,0.39980511
+"Phosphatidylcholine (PC) biosynthesis, PE => PC",,,0.39980511
+Methionine degradation,,,0.404394539
+N-glycosylation by oligosaccharyltransferase,,,0.409313706
+"Nucleotide sugar biosynthesis, glucose => UDP-glucose",,,0.409313706
+"Exosome, archaea",,,0.42060329
+GABA (gamma-Aminobutyrate) shunt,,,0.42060329
+GINS complex,,,0.42060329
+"Polyamine biosynthesis, arginine => agmatine => putrescine => spermidine",,,0.42060329
+"Proline biosynthesis, glutamate => proline",,,0.42060329
+"V-type ATPase, eukaryotes",,,0.42060329
+ECS complex,,,0.424229011
+N-glycan precursor biosynthesis,,,0.438366348
+NADH dehydrogenase (ubiquinone) 1 beta subcomplex,,,0.438366348
+MAPK (JNK) signaling,,,0.446359332
+Jak-STAT signaling pathway,,,0.453088451
+GnRH signaling pathway,,,0.469881183
+JAK-STAT signaling pathway,,,0.469881183
+"N-glycan biosynthesis, complex type",,,0.470913419
+Aldosterone synthesis and secretion,,,0.477576088
+Various types of N-glycan biosynthesis,,,0.477576088
+Gastric cancer,,,0.496647033
+"C19/C18-Steroid hormone biosynthesis, pregnenolone => androstenedione => estrone",,,0.502886426
+"GPI-anchor biosynthesis, core oligosaccharide",,,0.502886426
+"Inositol phosphate metabolism, PI=> PIP2 => Ins(1,4,5)P3 => Ins(1,3,4,5)P4",,,0.502886426
+"beta-Oxidation, acyl-CoA synthesis",,,0.502886426
+Thiamine metabolism,,,0.504438109
+cAMP signaling,,,0.504438109
+Glycosylphosphatidylinositol (GPI)-anchor biosynthesis,,,0.52400967
+Inflammatory bowel disease (IBD),,,0.530177971
+B cell receptor signaling pathway,,,0.53497473
+Bloom's syndrome complex,,,0.540823605
+"Glycosaminoglycan biosynthesis, linkage tetrasaccharide",,,0.540823605
+Pentose phosphate pathway (Pentose phosphate cycle),,,0.540823605
+"Pentose phosphate pathway, oxidative phase, glucose 6P => ribulose 5P",,,0.540823605
+SCF-FBW7 complex,,,0.540823605
+SCF-SKP2 complex,,,0.540823605
+Mannose type O-glycan biosynthesis,,,0.548876624
+"Glycolysis (Embden-Meyerhof pathway), glucose => pyruvate",,,0.560292212
+Phototransduction,,,0.560292212
+Viral protein interaction with cytokine and cytokine receptor,,,0.56335648
+Collecting duct acid secretion,,,0.563753943
+Retrograde endocannabinoid signaling,,,0.563753943
+Triacylglycerol biosynthesis,,,0.563753943
+N-Glycan biosynthesis,,,0.566916417
+Phagosome,,,0.57608198
+Heparan sulfate degradation,,,0.582570747
+Other glycan degradation,,,0.582570747
+Cholecalciferol biosynthesis,,,0.602064662
+DNA polymerase zeta  complex,,,0.602064662
+Lactosylceramide biosynthesis,,,0.602064662
+"Nucleotide sugar biosynthesis, galactose => UDP-galactose",,,0.602064662
+"Glycolysis, core module involving three-carbon compounds",,,0.602289967
+Inflammatory bowel disease,,,0.612775054
+Sphingosine biosynthesis,,,0.620910494
+Fanconi anemia pathway,,,0.623309323
+Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate,,,0.633911919
+"Glycosaminoglycan biosynthesis, chondroitin sulfate backbone",,,0.636093825
+N-glycan precursor trimming,,,0.636093825
+"Pentose phosphate pathway, non-oxidative phase, fructose 6P => ribose 5P",,,0.636093825
+SCF-BTRC complex,,,0.636093825
+SCF-FBS complex,,,0.636093825
+GnRH secretion,,,0.637116132
+Type II diabetes mellitus,,,0.644583971
+Cell cycle - G2/M transition,,,0.65254968
+Herpes simplex virus 1 infection,,,0.657484163
+Natural killer cell mediated cytotoxicity,,,0.657484163
+Renin-angiotensin system,,,0.662835485
+Staphylococcus aureus infection,,,0.669635784
+Cardiac muscle contraction,,,0.669955758
+Adrenergic signaling in cardiomyocytes,,,0.672558073
+Carbohydrate digestion and absorption,,,0.678526285
+Malaria,,,0.703671982
+Cytokine-cytokine receptor interaction,,,0.708845388
+Chemokine signaling pathway,,,0.712686769
+Antigen processing and presentation,,,0.724578474
+DNA damage-induced cell cycle checkpoints,,,0.724578474
+Dermatan sulfate degradation,,,0.724578474
+Hedgehog signaling pathway,,,0.724578474
+Sec61 complex,,,0.724578474
+"Steroid hormone biosynthesis, cholesterol => prognenolone => progesterone",,,0.724578474
+D-Glutamine and D-glutamate metabolism,,,0.729595652
+ESCRT-II complex,,,0.729595652
+"Fatty acid biosynthesis, initiation",,,0.729595652
+"Glycosphingolipid biosynthesis, ganglio series, LacCer => GT3",,,0.729595652
+Other types of O-glycan biosynthesis,,,0.729595652
+"Serine biosynthesis, glycerate-3P => serine",,,0.729595652
+Fc epsilon RI signaling pathway,,,0.743739362
+Synaptic vesicle cycle,,,0.770263593
+Steroid biosynthesis,,,0.771723446
+Renin secretion,,,0.778085527
+Viral myocarditis,,,0.778620466
+ECM-receptor interaction,,,0.781676335
+GABAergic synapse,,,0.784448469
+Melanogenesis,,,0.785496581
+Hematopoietic cell lineage,,,0.7929471
+Neutrophil extracellular trap formation,,,0.793124481
+Endocrine and other factor-regulated calcium reabsorption,,,0.799439133
+Protein digestion and absorption,,,0.816534916
+Glutamatergic synapse,,,0.824015478
+Notch signaling,,,0.825640894
+Apoptotic machinery,,,0.82610858
+Ceramide biosynthesis,,,0.82610858
+Insulin secretion,,,0.82610858
+MAPK (ERK5) signaling,,,0.82610858
+"PRPP biosynthesis, ribose 5P => PRPP",,,0.82610858
+Translocon-associated protein (TRAP) complex,,,0.82610858
+Virion - Adenovirus,,,0.82610858
+Wnt signaling pathway,,,0.866114117
+Mineral absorption,,,0.870663081
+Oxytocin signaling pathway,,,0.879471936
+Acylglycerol degradation,,,0.89161255
+"Catecholamine biosynthesis, tyrosine => dopamine => noradrenaline => adrenaline",,,0.89161255
+Cholinergic synapse,,,0.89161255
+Chondroitin sulfate degradation,,,0.89161255
+FA core complex,,,0.89161255
+"Glycosaminoglycan biosynthesis, heparan sulfate backbone",,,0.89161255
+"Glycosphingolipid biosynthesis, lacto-series, LacCer => Lc4Cer",,,0.89161255
+Keratan sulfate degradation,,,0.89161255
+"Melatonin biosynthesis, tryptophan => serotonin => melatonin",,,0.89161255
+"Neomycin, kanamycin and gentamicin biosynthesis",,,0.89161255
+cGMP signaling,,,0.89161255
+Cell adhesion molecules (CAMs),,,0.894826525
+Glycosaminoglycan biosynthesis - heparan sulfate / heparin,,,0.902948437
+Glycosphingolipid biosynthesis - ganglio series,,,0.902948437
+Gastric acid secretion,,,0.904250953
+Cell adhesion molecules,,,0.905778983
+Motor proteins,,,0.914910573
+Arrhythmogenic right ventricular cardiomyopathy (ARVC),,,0.925896682
+cAMP signaling pathway,,,0.93534812
+Creatine pathway,,,0.935541191
+ECV complex,,,0.935541191
+"Glycosphingolipid biosynthesis, neolacto-series, LacCer => nLc4Cer",,,0.935541191
+Glycosaminoglycan degradation,,,0.936700362
+Calcium signaling pathway,,,0.955764665
+Salivary secretion,,,0.965223767
+Arrhythmogenic right ventricular cardiomyopathy,,,0.98553082
+Neuroactive ligand-receptor interaction,,,0.987882707
+Alcoholism,,,1
+Allograft rejection,,,1
+Asthma,,,1
+Autoimmune thyroid disease,,,1
+Basal cell carcinoma,,,1
+Circadian entrainment,,,1
+ESCRT-I complex,,,1
+Ether lipid metabolism,,,1
+Glycosaminoglycan biosynthesis - keratan sulfate,,,1
+Glycosphingolipid biosynthesis - lacto and neolacto series,,,1
+Graft-versus-host disease,,,1
+Hedgehog signaling,,,1
+Intestinal immune network for IgA production,,,1
+MicroRNAs in cancer,,,1
+Morphine addiction,,,1
+Mucin type O-glycan biosynthesis,,,1
+"O-glycan biosynthesis, mucin type core",,,1
+Olfactory transduction,,,1
+Pancreatic secretion,,,1
+Systemic lupus erythematosus,,,1
+Taste transduction,,,1
+Type I diabetes mellitus,,,1
+Virion - Flavivirus,,,1
+Virion - Herpesvirus,,,1
+Wnt signaling,,,1
+alpha-Linolenic acid metabolism,,,1
