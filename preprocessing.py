@@ -104,7 +104,7 @@ def gene_filter(dataset_name, stage, net_path, exp_path, map_path, norm_type='id
 
 def args_parsing():
     parser = argparse.ArgumentParser(description='Parsing args on preprocessing.py')
-    parser.add_argument('-dataset', type=str, default='LP')
+    parser.add_argument('-dataset', type=str, default='LR')
     parser.add_argument('-stage', type=int, default=10)
     parser.add_argument('-norm_type', type=str, default='id')
     parser.add_argument('-mean', type=float, default=1)

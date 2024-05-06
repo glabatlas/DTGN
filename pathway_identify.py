@@ -11,7 +11,7 @@ from pathway_analysis.TGMI import triple_interaction, p_adjust, discretize
 
 
 # 将Pathway转换为pathway-[gene list]的形式
-def read_pathway(dataset="LP", use_all=False, sep='\t'):
+def read_pathway(dataset="LR", use_all=False, sep='\t'):
     path = f"./data/pathway/{dataset}/all.txt"
     pathways = pd.read_csv(path, sep=sep).values
     positive_terms = pd.read_csv(f"./data/pathway/{dataset}/positive_pathways.csv").iloc[:, 0].values.tolist()
@@ -171,7 +171,7 @@ def tf_pathway_score(dataset, run_id, permute_option="hidden_factor", stage=10, 
 
 def args_parsing():
     parser = argparse.ArgumentParser(description='Parsing args on main.py')
-    parser.add_argument('-dataset', type=str, default="LP")
+    parser.add_argument('-dataset', type=str, default="LR")
     parser.add_argument('-method', type=str, default='DTGN')
     parser.add_argument('-stage', type=int, default=10)
     parser.add_argument('-times', type=int, default=100)

@@ -33,7 +33,7 @@ input: data/dataset/raw_data/exp.csv, data/dataset/raw_data/network.csv, data/da
 output: data/dataset/training_node.csv, data/dataset/training_net.csv, data/dataset/mapping.csv
 
 ```python
->> python preprocessing.py -dataset LP -stage 10 -mean 1 -var 0 
+>> python preprocessing.py -dataset LR -stage 10 -mean 1 -var 0 
 ```
 
 
@@ -46,11 +46,11 @@ output: out/dataset/factor_link, out/dataset/model, out/dataset/permutation
 
 Trainning a new model:
 ```python
->> python main.py -dataset LP -method DTGN -train true -stage 10 -epoch 30000
+>> python main.py -dataset LR -method DTGN -train true -stage 10 -epoch 30000
 ```
 Loading the trained model:
 ```python
->> python main.py -dataset LP -method DTGN -train false -stage 10
+>> python main.py -dataset LR -method DTGN -train false -stage 10
 ```
 
 ### Identifying phenotype-specific pathways
@@ -60,5 +60,5 @@ input: data/pathway/dataset/all.txt, data/pathway/dataset/positive_pathways.csv,
 
 output: out/dataset/pathway_score/DTGN/factor.csv
 ```python
->> python pathway_identify.py -dataset LP -method DTGN -stage 10 -times 1000 -threshold 0.01
+>> python pathway_identify.py -dataset LR -method DTGN -stage 10 -times 1000 -threshold 0.01
 ```

@@ -25,7 +25,7 @@ def seed_everything(seed):
 
 def args_parsing():
     parser = argparse.ArgumentParser(description='Parsing args on main.py')
-    parser.add_argument('-dataset', type=str, default='LP')
+    parser.add_argument('-dataset', type=str, default='LR')
     parser.add_argument('-activation', type=str, default='relu')
     parser.add_argument('-train', type=str, default='false')
     parser.add_argument('-method', type=str, default='DTGN')
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     print(f"网络信息：{g}")
 
     pvalue = 0.05
-    if dataset == "LP":
+    if dataset == "LR":
         hidden = [16, 8, 2]
     elif dataset == "MI":
         hidden = [32, 8, 2]
