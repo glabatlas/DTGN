@@ -172,7 +172,7 @@ def tf_pathway_score(dataset, run_id, permute_option="hidden_factor", stage=10, 
 def args_parsing():
     parser = argparse.ArgumentParser(description='Parsing args on main.py')
     parser.add_argument('-dataset', type=str, default="LP")
-    parser.add_argument('-method', type=str, default='DyTGNets')
+    parser.add_argument('-method', type=str, default='DTGN')
     parser.add_argument('-stage', type=int, default=10)
     parser.add_argument('-times', type=int, default=100)
     parser.add_argument('-threshold', type=float, default=0.01)

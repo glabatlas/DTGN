@@ -28,7 +28,7 @@ def args_parsing():
     parser.add_argument('-dataset', type=str, default='LP')
     parser.add_argument('-activation', type=str, default='relu')
     parser.add_argument('-train', type=str, default='false')
-    parser.add_argument('-method', type=str, default='DyTGNets')
+    parser.add_argument('-method', type=str, default='DTGN')
     parser.add_argument('-wd', type=float, default='5e-5')
     parser.add_argument('-lr', type=float, default='1e-4')
     parser.add_argument('-epoch', type=int, default=30000)
@@ -118,10 +118,10 @@ if __name__ == '__main__':
     seed_everything(42)
     torch.cuda.empty_cache()
 
-    train_pyg_gcn(features, hidden, hidden[::-1], "DyTGNets")
+    train_pyg_gcn(features, hidden, hidden[::-1], "DTGN")
     factor_grn.get_factor_grn(dataset=dataset, stage=stage, run_id=args.method, threshold=pvalue,
                               mapping_path=mapping_path, edges_path=train_net_path)
-    if args.method == 'DyTGNets':
+    if args.method == 'DTGN':
         permutation_test.diff_exp_test(dataset=dataset, stage=stage, run_id=args.method, using_exp=False,
                                        global_net=False,
                                        pvalue=pvalue, times=100, mapping_path=mapping_path, type="tf")
