@@ -27,7 +27,7 @@ def exp_normalize(gene_exp, norm_type='log2'):
         max_value = max(gene_exp)
         gene_exp = [(value - min_value) / (max_value - min_value) for value in gene_exp]
         return gene_exp
-    elif norm_type == "LP-relog2":
+    elif norm_type == "LR-relog2":
         return np.log2(np.power(2, gene_exp) + 1)
     else:
         raise NotImplementedError
