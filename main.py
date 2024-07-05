@@ -1,18 +1,27 @@
-import pandas as pd
-import torch
-import numpy as np
-import random
-import argparse
-import os
+# @Author : CyIce
+# @Time : 2024/6/25 10:13
 
+import random
+import os
+import numpy as np
+import pandas as pd
+
+import torch
+import dgl
+from arg_parser import args_parsing
+from preprocess.preprocessing import preprocessing
+from utils.one_hot_encode import one_hot_encode
 from model.MyGAE import MyGAE
 from model.PygGCN import GCNEncoder, GCNDecoder
+from factor_net.factor_grn import get_factor_grn
+from factor_net.permutation_test import diff_exp_test
 from train import train
-from utils import file_operation, graph_operation
-from factor_net import factor_grn, permutation_test
 
 
 def seed_everything(seed):
+    """
+    Setting the random seed for reproducibility.
+    """
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
@@ -21,113 +30,84 @@ def seed_everything(seed):
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-
-
-def args_parsing():
-    parser = argparse.ArgumentParser(description='Parsing args on main.py')
-    parser.add_argument('-dataset', type=str, default='LR')
-    parser.add_argument('-activation', type=str, default='relu')
-    parser.add_argument('-train', type=str, default='false')
-    parser.add_argument('-method', type=str, default='DTGN')
-    parser.add_argument('-wd', type=float, default='5e-5')
-    parser.add_argument('-lr', type=float, default='1e-4')
-    parser.add_argument('-epoch', type=int, default=30000)
-    parser.add_argument('-device', type=str, default="gpu")
-    parser.add_argument('-stage', type=int, default=10)
-    return parser
-
-
-# 将表达数据重新编码
-def one_hot_encode(feat, num_intervals, origin_val=False):
-    max_value = torch.max(feat)
-    min_value = torch.min(feat)
-    stage_nums = feat.shape[0]
-    n = feat.shape[1]
-    interval_width = (max_value - min_value) / num_intervals
-    one_hot_feat = torch.zeros((stage_nums, n, num_intervals))
-    one_hot_pos = torch.zeros((stage_nums, n, 1), dtype=torch.long)
-    for i in range(stage_nums):
-        for j in range(n):
-            interval_index = min(num_intervals - 1, int((feat[i, j, 0] - min_value) // interval_width))
-            if origin_val:
-                one_hot_feat[i, j, interval_index] = feat[i, j, 0]
-                one_hot_pos[i, j, 0] = interval_index
-            else:
-                one_hot_feat[i, j, interval_index] = 1
-                one_hot_pos[i, j, 0] = interval_index
-    one_hot_pos = one_hot_pos.reshape((-1))
-    return one_hot_feat, one_hot_pos.reshape((-1))
-
-
-def train_pyg_gcn(feat, encode_list, decode_list, run_id):
-    train_edges = torch.tensor(edges).T
-    train_feat = feat.T.unsqueeze(-1)
-    train_feat, one_hot_pos = one_hot_encode(train_feat, encode_list[0])
-
-    if args.train == 'true':
-        model = MyGAE(GCNEncoder(encode_list, activation=activation), GCNDecoder(decode_list, activation=activation))
-        optim = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=5e-5)
-        train(model, train_feat, train_edges, one_hot_pos, optim, device, dataset=args.dataset,
-              recon_feat=feat.T.unsqueeze(-1), epochs=args.epoch,
-              run_id=run_id)
-        torch.save(model, f"out/{args.dataset}/model/{run_id}.model")
-    elif args.train == 'false':
-        model = torch.load(f"out/{args.dataset}/model/{run_id}.model",map_location=device)
-        hidden_feat = model.encoder(train_feat, train_edges).permute(1, 0, 2).reshape((train_feat.size(1), -1))
-        file_operation.save_features(f'out/{args.dataset}/features/{run_id}', f'features.csv',hidden_feat.detach().numpy())
-    else:
-        raise NotImplementedError
-
-if __name__ == '__main__':
-
-    main_parser = args_parsing()
-    args = main_parser.parse_args()
-
-    dataset = args.dataset
-    activation = torch.nn.Sigmoid() if args.activation == 'sigmoid' else torch.nn.ReLU()
-    device = torch.device("cuda") if args.device == "gpu" else torch.device("cpu")
-    stage = args.stage
-
-    train_net_path = f"./data/{args.dataset}/training_net.csv"
-    train_node_path = f"./data/{args.dataset}/training_node.csv"
-    mapping_path = f"./data/{args.dataset}/mapping.csv"
-
-    edges = pd.read_csv(train_net_path).values
-    gene_list = {node for pair in edges for node in pair}
-    edges = edges.tolist()
-    features = torch.tensor(pd.read_csv(train_node_path).iloc[:, 2:].values.tolist())
-    file_operation.save_features(f'out/{args.dataset}/features/SSN', f'features.csv', features)
-    nums_node = len(gene_list)
-    g = graph_operation.create_network(edges, nums_node, is_bidirected=True, add_loop=False)
-    is_connected, c = graph_operation.is_conneted_graph(edges)
-
-    print(f"dataset:{args.dataset}, method:{args.method}, num_stage:{args.stage}, train:{args.train},device:{args.device},epoch:{args.epoch},lr:{args.lr}")
-    print(f'图G是否连通: {is_connected}')
-    print(f"网络信息：{g}")
-
-    pvalue = 0.05
-    if dataset == "LR":
-        hidden = [16, 8, 2]
-    elif dataset == "MI":
-        hidden = [32, 8, 2]
-    elif dataset == "HCV":
-        hiddent = [24, 8, 2]
-    else:
-        raise NotImplementedError
-    a = 0
-    seed_everything(42)
     torch.cuda.empty_cache()
 
-    train_pyg_gcn(features, hidden, hidden[::-1], "DTGN")
-    factor_grn.get_factor_grn(dataset=dataset, stage=stage, run_id=args.method, threshold=pvalue,
-                              mapping_path=mapping_path, edges_path=train_net_path)
-    if args.method == 'DTGN':
-        permutation_test.diff_exp_test(dataset=dataset, stage=stage, run_id=args.method, using_exp=False,
-                                       global_net=False,
-                                       pvalue=pvalue, times=100, mapping_path=mapping_path, type="tf")
-    elif args.method == 'SSN':
-        permutation_test.diff_exp_test(dataset=dataset, stage=stage, run_id=args.method, using_exp=True,
-                                       global_net=False, times=100,
-                                       mapping_path=mapping_path)
+
+def create_network(link_pairs, num_nodes, bi_directed=True, add_loop=False):
+    """
+    Create a dgl graph from a list of link pairs.
+    """
+    g = dgl.graph(link_pairs, num_nodes=num_nodes)
+    g = dgl.remove_self_loop(g)
+    if bi_directed:
+        g = dgl.to_bidirected(g)
+    if add_loop:
+        g = dgl.add_self_loop(g)
+    return g
+
+
+def train_pyg_gcn(name, genes, feat, activation, lr, wd, epochs, device, encoder_layer, decoder_layer):
+    train_edges = torch.tensor(edges).T
+    train_feat = feat.T.unsqueeze(-1)
+    train_feat, one_hot_pos = one_hot_encode(train_feat, encoder_layer[0])
+
+    model = MyGAE(GCNEncoder(encoder_layer, activation=activation), GCNDecoder(decoder_layer, activation=activation))
+    optim = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd)
+    train(name, model, genes, train_feat, train_edges, optim, device, epochs)
+    torch.save(model, f"./out/{name}/model.pth")
+
+    # model = torch.load(f"out/{name}/model.pth", map_location=device)
+    # hidden_feat = model.encoder(train_feat, train_edges).permute(1, 0, 2).reshape((train_feat.size(1), -1))
+    # data = pd.DataFrame( hidden_feat.detach().numpy())
+    # print(train_feat.shape)
+    # data.to_csv(f'out/{name}/features.csv', index=False)
+    # exit(0)
+
+
+if __name__ == '__main__':
+    args = args_parsing().parse_args()
+    seed_everything(42)
+
+    is_train = args.train
+    activation = torch.nn.Sigmoid() if args.activation == 'sigmoid' else torch.nn.ReLU()
+    device = torch.device("cuda") if args.device == "gpu" else torch.device("cpu")
+    encoder_layer = list(map(int, args.encoder_layer.split(',')))
+    decoder_layer = list(map(int, args.decoder_layer.split(',')))
+
+    # Create the output folder if it does not exist.
+    if not os.path.exists(f"./out/{args.name}"):
+        os.makedirs(f"./out/{args.name}")
+
+    exp, edges = preprocessing(args.exp_path, args.net_path, args.mean, args.var, args.norm_type)
+    genes = [row[0] for row in exp]
+    feats = np.array([row[1:] for row in exp])
+    feats = torch.tensor(feats).squeeze()
+    num_stages = feats.shape[1]
+
+    # create the mapping beween symbol and index
+    sybol2idx = {row[0]: index for index, row in enumerate(exp)}
+    idx2sybal = {idx: sybol for sybol, idx in sybol2idx.items()}
+    # convert symbol to index
+    edges = [[sybol2idx[edge[0]], sybol2idx[edge[1]]] for edge in edges]
+    # create the dgl graph
+    num_nodes = len(genes)
+    g = create_network(edges, num_nodes)
+    print(f"TF-Gene network: {g}")
+
+    # training DTGN model
+    if args.train == "true":
+        print("Training...")
+        train_pyg_gcn(args.name, genes, feats, activation, args.lr, args.wd, args.epochs, device, encoder_layer,
+                      decoder_layer)
     else:
-        raise NotImplementedError
+        print("train == false !")
+
+    # Constructing the dynamic TF-Gene network for each stage.
+    print("Constructing dynamic TGNs...")
+    get_factor_grn(args.name, feats, edges, idx2sybal, num_stages, args.threshold)
+
+    # Using permutation test to test the significance of the TFs.
+    print("Permutation test...")
+    diff_exp_test(args.name, num_stages, args.permutation_times)
+
+    print("Finish!")

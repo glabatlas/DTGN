@@ -3,17 +3,10 @@ import numpy as np
 import os
 
 
-def save_features(path, filename, feat, columns=None):
+def save_df(dataframe, path, filename, header=None):
     if not os.path.exists(path):
         os.makedirs(path)
-    dataframe = pd.DataFrame(feat, columns=columns)
-    dataframe.to_csv(path + '/' + filename, index=False)
-    print(f"saved features to {path + '/' + filename}")
-
-
-def load_feature(path, epoch=1):
-    feat = np.array(pd.read_csv(path + f'features{epoch}.csv').values)
-    return feat
+    dataframe.to_csv(path + '/' + filename, index=False, header=header)
 
 
 def read_genes(path, stage=6, type="node"):

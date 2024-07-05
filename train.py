@@ -1,18 +1,48 @@
+# @Author : CyIce
+# @Time : 2024/6/24 17:32
+
 import torch
 from tqdm import tqdm
-
-from utils import loss_curve, file_operation
 from torch_geometric.utils import negative_sampling
+import matplotlib.pyplot as plt
+import pandas as pd
+from utils.file_operation import save_df
 
 
-def train(model, feat, edges,one_hot_pos, optim, device, dataset,recon_feat=None, epochs=10, run_id=1):
+def loss_curve(name, data: dict, rate=1.0):
+    """
+    drawing the loss curve.
+    """
+    plt.figure()
+    COLOR_LIST = ['b', 'g', 'r', 'k', 'y']
+    ax = plt.axes()
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    plt.xlabel('iters')
+    plt.ylabel('loss')
+    last_loss = []
+    for i, label in enumerate(sorted(data.keys(), reverse=True)):
+        loss = data[label]
+        last_loss.append(str(round(loss[-1], 4)))
+        x_train_loss = range(int((1 - rate) * len(loss)), len(loss))
+        y_total_loss = loss[int((1 - rate) * len(loss)):]
+        plt.plot(x_train_loss, y_total_loss, linewidth=1, color=COLOR_LIST[i], linestyle="solid", label=label)
+
+    plt.legend()
+    plt.title('Loss curve : ' + last_loss[0] + " = " + "+".join(last_loss[1:]))
+    plt.savefig(f'./out/{name}/loss-{rate}.png')
+    plt.close()
+
+
+def train(name, model, genes, feat, edges, optim, device, epochs):
+    """
+    Tranning the DTGN model.
+    """
     model.train()
     model = model.to(device)
     feat = feat.to(device)
     edges = edges.to(device)
-    one_hot_pos = one_hot_pos.to(device)
-    if recon_feat is not None:
-        recon_feat = recon_feat.to(device)
 
     history_loss = [[], [], [], []]
     progress_bar = tqdm(total=epochs, ncols=160)
@@ -25,8 +55,6 @@ def train(model, feat, edges,one_hot_pos, optim, device, dataset,recon_feat=None
         optim.zero_grad()
         model.encoder.is_train = True
         hidden_feat = model.encoder(feat, edges)
-
-        decode_feat = recon_feat
         feat_loss = torch.tensor([0]).to(device)
 
         negative_edges = negative_sampling(edges, (tf_nums, feat.size(1)), force_undirected=True)
@@ -41,32 +69,28 @@ def train(model, feat, edges,one_hot_pos, optim, device, dataset,recon_feat=None
             history_loss[2].append(recon_loss.item())
 
         if i % 50 == 0:
-            model.encoder.is_train = False
             hidden_feat = model.encoder(feat, edges)
             test_roc, test_ap = model.test(hidden_feat, edges, negative_edges)
 
-        if i % (epochs / 5) == 0:
-            model.encoder.is_train = False
+        if i == epochs:
             decode_feat = model.feat_decoder(hidden_feat, edges).permute(1, 0, 2).reshape((feat.size(1), -1))
             hidden_feat = model.encoder(feat, edges).permute(1, 0, 2).reshape((feat.size(1), -1))
 
-            if i == epochs:
-                file_operation.save_features(f'out/{dataset}/features/{run_id}', f'features.csv',
-                                          hidden_feat.cpu().detach().numpy())
-                file_operation.save_features(f'out/{dataset}/features/{run_id}', f'de_feat.csv',
-                                          decode_feat.cpu().detach().numpy())
-            else:
-                file_operation.save_features(f'out/{dataset}/features/{run_id}', f'features{i}.csv',
-                                          hidden_feat.cpu().detach().numpy())
-                file_operation.save_features(f'out/{dataset}/features/{run_id}', f'de_feat{i}.csv',
-                                          decode_feat.cpu().detach().numpy())
+            hidden_df = pd.DataFrame(hidden_feat.cpu().detach().numpy())
+            decode_df = pd.DataFrame(decode_feat.cpu().detach().numpy())
+            hidden_df.insert(0, 'GeneSymbol', genes)
+            decode_df.insert(0, 'GeneSymbol', genes)
+            hidden_header = ['GeneSymbol'] + [f"feature_{i}" for i in range(hidden_df.shape[1] - 1)]
+            decode_header = ['GeneSymbol'] + [f"feature_{i}" for i in range(decode_df.shape[1] - 1)]
+            save_df(hidden_df, f"./out/{name}", "features.csv", header=hidden_header)
+            save_df(decode_df, f"./out/{name}", "de_features.csv", header=decode_header)
 
         progress_bar.update(1)
         print_str = f"total loss: " + "{:.4f}".format(total_loss.item()) + "  feat loss: " + "{:.4f}".format(
-            feat_loss.item()) + "  struct loss: " + "{:.4f}".format(
-            recon_loss.item()) + "  AOC:" + "{:.4f}".format(test_roc) + "  AP:" + "{:.4f}".format(test_ap)
-        progress_bar.set_description(str(run_id) + f" :{print_str}", refresh=True)
+            feat_loss.item()) + "  recon loss: " + "{:.4f}".format(
+            recon_loss.item()) + "  AUC:" + "{:.4f}".format(test_roc) + "  AP:" + "{:.4f}".format(test_ap)
+        progress_bar.set_description(str(name) + f" :{print_str}", refresh=True)
 
     loss_dict = {'Total loss': history_loss[0], "Feat loss": history_loss[1], "Recon loss": history_loss[2]}
-    loss_curve.loss_curve(loss_dict, dataset=dataset,rate=1, run_id=run_id)
-    loss_curve.loss_curve(loss_dict, dataset=dataset,rate=0.7, run_id=run_id)
+    loss_curve(name, loss_dict, rate=1)
+    loss_curve(name, loss_dict, rate=0.7)
