@@ -4,7 +4,7 @@ import pandas as pd
 from scipy import stats
 from utils.file_operation import save_df
 
-from utils.draw_pcc_hist import draw_hist
+from utils.draw_pcc_hist import draw_hist, plot_standard_normal_with_highlighted_points
 
 
 def delta_pcc(features, t, stage):
@@ -19,13 +19,15 @@ def delta_pcc(features, t, stage):
     k2 = 0
     N = d * (stage - 1)
 
+    total_delta = []
+    total_pcc = []
     for i in range(d):
         perturbed_feat = np.concatenate((five_features, features[:, d * (t - 1) + i].reshape((-1, 1))), axis=1)
         pcc_perturbed = np.corrcoef(perturbed_feat)
         delta = pcc_perturbed - pcc_n
+        total_delta.append(delta)
+        total_pcc.append(pcc_n)
 
-        # drawing the histogram of delta pcc.
-        draw_hist(delta, title=f"iPSC-{t}", bins=100,saved_path="./out/img")
         eps = 1e-20
         z_score = delta / ((1 - pcc_n ** 2 + eps) / (N - 1))
         if d == 1:
@@ -34,9 +36,31 @@ def delta_pcc(features, t, stage):
         else:
             # Using Chi-square test when d > 1
             k2 += z_score ** 2
+
+    from scipy.stats import pearsonr,spearmanr
+    def f(m):
+        dp1 = total_delta[0].flatten()
+        dp2 = total_delta[1].flatten()
+        num_elements = dp1.size
+        indices = np.random.choice(num_elements, m, replace=False)
+        sampled_values1 = dp1[indices]
+        sampled_values2 = dp2[indices]
+        # PCC
+        correlation, p_value = pearsonr(sampled_values1, sampled_values2)
+        # Spearmanr
+        # correlation, p_value = spearmanr(sampled_values1, sampled_values2)
+        print(m, correlation, p_value)
+
+    f(10)
+    f(100)
+    f(1000)
+    f(10000)
+    f(100000)
+    exit(0)
+
     if d > 1:
         p_value = stats.chi2.sf(k2, d - 1)
-    return p_value
+    return p_value, total_delta, total_pcc
 
 
 class GenePair:
@@ -56,7 +80,7 @@ class GenePair:
 
 
 def get_stage_edges(t, feats, idx2sybol, edges, stage, threshold=0.01):
-    pvalues = delta_pcc(feats, t, stage)
+    pvalues, deltas, pcc_n = delta_pcc(feats, t, stage)
     factor_links = []
 
     for u, v in edges:
@@ -74,7 +98,7 @@ def get_stage_edges(t, feats, idx2sybol, edges, stage, threshold=0.01):
         if corr_pvalue[i] <= threshold:
             f.value = corr_pvalue[i]
             corr_out.append(f)
-    return corr_out
+    return corr_out, deltas, pcc_n
 
 
 def construct_network(edges):
@@ -93,9 +117,12 @@ def get_factor_grn(name, feats, edges, idx2sybol, stage, threshold):
     """
     Constructing the dynamic TF-Gene network for each stage.
     """
-    # feats = np.array(pd.read_csv(f'out/{name}/features.csv').values)
+    total_delta = []
+    total_pcc = []
     for i in range(1, stage + 1):
-        factor_link = get_stage_edges(i, feats, idx2sybol, edges, stage, threshold)
+        factor_link, deltas, pcc_n = get_stage_edges(i, feats, idx2sybol, edges, stage, threshold)
+        total_delta += deltas
+        total_pcc += pcc_n
         data = []
         out_edges = []
         for link in factor_link:
@@ -105,4 +132,20 @@ def get_factor_grn(name, feats, edges, idx2sybol, stage, threshold):
         dataframe = pd.DataFrame(data)
         save_df(dataframe, f"./out/{name}/dynamicTGNs", f"factor{i}.csv", header=['Source', 'Target', 'PValue'])
 
-    exit(0)
+    N = (feats.shape[1] // stage) * (stage - 1)
+    alpha = 0.05
+    delta = np.stack(total_delta, axis=0)
+    pcc = np.stack(total_pcc, axis=0)
+    z_critical_low, z_critical_high = draw_hist(delta, alpha=alpha, title=f"{name}-all", saved_path=f"./out/img")
+    delta_flattened = delta.flatten()
+    pcc_flattend = pcc.flatten()
+    extreme_values = delta_flattened[(delta_flattened <= z_critical_low) | (delta_flattened >= z_critical_high)]
+    extreme_pcc = pcc_flattend[(delta_flattened <= z_critical_low) | (delta_flattened >= z_critical_high)]
+    eps = 1e-20
+    z_score = extreme_values / ((1 - extreme_pcc ** 2 + eps) / (N - 1))
+    plot_standard_normal_with_highlighted_points(z_score, 10, alpha=alpha, title=f"{name}-hist-10points",
+                                                 saved_path=f"./out/img")
+    plot_standard_normal_with_highlighted_points(z_score, 100, alpha=alpha, title=f"{name}-hist-100points",
+                                                 saved_path=f"./out/img")
+    plot_standard_normal_with_highlighted_points(z_score, 1000, alpha=alpha, title=f"{name}-hist-1000points",
+                                                 saved_path=f"./out/img")

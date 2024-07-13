@@ -7,7 +7,10 @@ import pandas as pd
 from utils.pathway_utils import read_pathway
 
 
-def create_tfs(name, pos_tfs_path, pos_pathways_path, pathway_path, out_path):
+def create_tfs(name, pos_tfs_path, pos_pathways_path, pathway_path, out_path, min_overlap):
+    """
+    create netative tfs according to the given positive tfs and known pathway-gene annotations.
+    """
     pathway_dict = read_pathway(pathway_path)
     positive_genes = pd.read_csv(pos_tfs_path).iloc[:, 0].values.tolist()
     train_tfs = pd.read_csv(f"../data/{name}/network.csv").iloc[:, 0].values.tolist()
@@ -27,7 +30,7 @@ def create_tfs(name, pos_tfs_path, pos_pathways_path, pathway_path, out_path):
         pos_pw_gene.update(pathway_dict[pw])
 
     for key in pathway_dict.keys():
-        if (len(pos_pw_gene.intersection(pathway_dict[key])) > 4):
+        if (len(pos_pw_gene.intersection(pathway_dict[key])) > min_overlap):
             positive_pathways.add(key)
 
     negative_pathways = all_pathways - positive_pathways
@@ -51,6 +54,7 @@ def create_tfs(name, pos_tfs_path, pos_pathways_path, pathway_path, out_path):
 
 
 if __name__ == '__main__':
+    min_overlap = 4
     create_tfs("IPSC", "../data/IPSC/valid_data/related_tfs.csv",
                "../data/IPSC/valid_data/positive_pathways.csv",
-               "../data/IPSC/pathways_genes.csv", "../data/IPSC/valid_data")
+               "../data/IPSC/pathways_genes.csv", "../data/IPSC/valid_data", min_overlap)

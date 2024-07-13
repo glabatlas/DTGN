@@ -1,7 +1,6 @@
 # The following code snippet is modified based on the original code by Hua-CM
 # Original code: https://github.com/Hua-CM/TGMI
 
-import pandas as pd
 from scipy.stats import rankdata, norm
 import numpy as np
 

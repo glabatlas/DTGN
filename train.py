@@ -39,6 +39,7 @@ def train(name, model, genes, feat, edges, optim, device, epochs):
     """
     Tranning the DTGN model.
     """
+    global hidden_feat
     model.train()
     model = model.to(device)
     feat = feat.to(device)
@@ -94,3 +95,5 @@ def train(name, model, genes, feat, edges, optim, device, epochs):
     loss_dict = {'Total loss': history_loss[0], "Feat loss": history_loss[1], "Recon loss": history_loss[2]}
     loss_curve(name, loss_dict, rate=1)
     loss_curve(name, loss_dict, rate=0.7)
+
+    return hidden_feat.cpu().detach().numpy()

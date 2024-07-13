@@ -4,21 +4,15 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import networkx as nx
 from sklearn.metrics import confusion_matrix
-import math
-
-import random
 import numpy as np
-import torch
 from sklearn.metrics import roc_auc_score, roc_curve
 from sklearn.metrics import precision_recall_curve, auc
 
-from utils.draw_roc import draw_roc
 from utils.file_operation import save_df
 
 
-def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_stage, end_stage, top=-1):
+def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_stage, end_stage, top=-1, compare=False):
     positive_tfs = pd.read_csv(positive_tf_path).iloc[:, 0].values.tolist()
     positive_tfs = {tf for tf in positive_tfs}
     negative_tfs = pd.read_csv(negative_tf_path).iloc[:, 0].values.tolist()
@@ -27,14 +21,20 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
 
     tf_p_dict = {}
     for i in range(start_stage, end_stage):
-        tf_list = pd.read_csv(f"{permutation_path}/stage{i + 1}.csv").iloc[:, 0].values.tolist()
+        if compare:
+            tf_list = pd.read_excel(f"{permutation_path}/factor{i + 1}.xlsx").iloc[:, 0].values.tolist()
+        else:
+            tf_list = pd.read_csv(f"{permutation_path}/stage{i + 1}.csv").iloc[:, 0].values.tolist()
         for tf in tf_list:
             tf = tf.split('_')[0]
             if tf in valid_tfs:
                 tf_p_dict[tf] = []
 
     for i in range(start_stage, end_stage):
-        tf_list = pd.read_csv(f"{permutation_path}/stage{i + 1}.csv").iloc[:, 0:2].values.tolist()
+        if compare:
+            tf_list = pd.read_excel(f"{permutation_path}/factor{i + 1}.xlsx").iloc[:, 0:2].values.tolist()
+        else:
+            tf_list = pd.read_csv(f"{permutation_path}/stage{i + 1}.csv").iloc[:, 0:2].values.tolist()
         if not tf_list:
             continue
         tf_list.sort(key=lambda x: x[1])
@@ -46,7 +46,7 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
                 rank += 1
             rank_list.append(rank)
 
-        # 更新 tf_list 的排名
+        # update the rank of each TF.
         for j, rank in enumerate(rank_list):
             tf_list[j][1] = rank
 
@@ -75,7 +75,6 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
 
     tn, fp, fn, tp = confusion_matrix(actual, predict).ravel()
 
-    # 获取排序后的 TF 列表
     tfs = sorted(tf_p_dict.keys(), key=lambda x: tf_p_dict[x])
     if top != -1:
         tfs = tfs[:top]
@@ -88,7 +87,7 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
             y_true.append(1)
         elif tf in negative_tfs:
             y_true.append(0)
-        y_scores.append(round(tf_p_dict[tf],4))
+        y_scores.append(round(tf_p_dict[tf], 4))
         y_names.append(tf)
 
     y_true = np.array(y_true)
@@ -119,11 +118,14 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
 
 
 if __name__ == '__main__':
-    # name = "DTGN-dim32-mean0.5"
-    name = "DTGN-16"
+    # name = "IPSC-32-m0v1" #0.69
+    # name = "IPSC-24-m0v1"
+    name = "IPSC-SSN"
+    # name = "TSM55" # 0.444
+    compare = False
     permutation_path = f"../out/{name}/permutation"
     positive_tf_path = "../data/IPSC/valid_data/positive_tfs.csv"
     negative_tf_path = "../data/IPSC/valid_data/negative_tfs.csv"
     start_stage = 1
     end_stage = 7
-    draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_stage, end_stage, top=-1)
+    draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_stage, end_stage, top=-1, compare=compare)
