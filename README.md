@@ -75,8 +75,8 @@ How to use
 
 ### Gene Expression Data
 
-- Header Row: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as TimePoint1, TimePoint2, ..., TimePointN.
-- Data Rows: Each subsequent row represents the expression data for a specific gene at different time points.
+- **Header Row**: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as TimePoint1, TimePoint2, ..., TimePointN.
+- **Data Rows**: Each subsequent row represents the expression data for a specific gene at different time points.
 
 | geneSymbol | TimePoint1 | TimePoint2 | TimePoint3 | TimePoint4 | ... | TimePointN |
 |------------|-------------|-------------|-------------|-------------|-----|-------------|
@@ -89,8 +89,8 @@ How to use
 
 ### TF-Gene Network Data
 
-- Header Row: The first row contains the column headers: source and target.
-- Data Rows: Each subsequent row represents an edge in the network.
+- **Header Row**: The first row contains the column headers: source and target.
+- **Data Rows**: Each subsequent row represents an edge in the network.
 
 | source | target |
 |--------|--------|
@@ -105,6 +105,7 @@ How to use
 ## Eaxmple
 
 git this project directory
+
 cd ./DTGN/
 
 ```
