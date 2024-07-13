@@ -110,4 +110,4 @@ How to use
 
 ###
 - **--exp_path**: The path to the gene expression data.
-- **--net_path**: THe path to the TF-Gene network data.
+- **--net_path**: The path to the TF-Gene network data.
