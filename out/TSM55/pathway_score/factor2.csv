@@ -1,0 +1,66 @@
+pathway,nums,percent,pvalue
+Ribosome,85,85,0
+"Ribosome, eukaryotes",59,89.39,0
+Spliceosome,95,93.14,0
+Coronavirus disease - COVID-19,86,73.5,0
+DNA replication,33,100,0
+Nuclear pore complex,23,76.67,0
+Ribosome biogenesis in eukaryotes,48,85.71,0
+Base excision repair,29,87.88,0
+Cell cycle,124,95.38,0
+Mismatch repair,22,100,0
+mRNA surveillance pathway,57,85.07,0
+Homologous recombination,28,90.32,0
+Polycomb repressive complex,60,95.24,0
+RNA transport,109,94.78,0
+RNA degradation,25,54.35,0
+"Spliceosome, 35S U5-snRNP",22,84.62,0
+Nucleotide excision repair,34,80.95,0
+Herpes simplex infection,77,81.91,0
+Nucleocytoplasmic transport,76,91.57,0
+Pyrimidine metabolism,63,88.73,0.005
+Oocyte meiosis,60,76.92,0.0056
+Basal transcription factors,24,61.54,0.006
+Fanconi anemia pathway,26,81.25,0.0079
+Amyotrophic lateral sclerosis,139,72.02,0.0078
+Glycolysis / Gluconeogenesis,31,100,0.0524
+Purine metabolism,84,87.5,0.0518
+Citrate cycle (TCA cycle),21,100,0.0868
+Pyruvate metabolism,29,100,0.085
+Progesterone-mediated oocyte maturation,53,79.1,0.1213
+Viral life cycle - HIV-1,21,61.76,0.1369
+Huntington's disease,59,54.63,0.1485
+Drug metabolism - cytochrome P450,23,100,0.1525
+Metabolism of xenobiotics by cytochrome P450,26,100,0.2431
+Transcriptional misregulation in cancer,70,76.09,0.236
+Huntington disease,102,63.35,0.2793
+Glutathione metabolism,24,60,0.2838
+Drug metabolism - other enzymes,25,62.5,0.2971
+HTLV-I infection,131,87.33,0.3551
+Metabolic pathways,501,86.53,0.3738
+Ubiquitin mediated proteolysis,54,61.36,0.3775
+Nucleotide metabolism,38,80.85,0.3996
+Legionellosis,24,100,0.605
+Gastric cancer,42,58.33,0.6321
+Platinum drug resistance,32,55.17,0.6179
+Small cell lung cancer,38,59.38,0.654
+FoxO signaling pathway,41,53.95,0.7899
+Signaling pathways regulating pluripotency of stem cells,56,70.89,0.7838
+Propanoate metabolism,24,100,0.7763
+Chronic myeloid leukemia,37,68.52,0.8201
+ATP-dependent chromatin remodeling,60,86.96,0.8231
+Neutrophil extracellular trap formation,30,52.63,0.8267
+Prostate cancer,44,73.33,0.8374
+Hepatocellular carcinoma,72,71.29,0.8648
+Herpes simplex virus 1 infection,124,82.12,0.8588
+Spinocerebellar ataxia,44,54.32,0.866
+Endocrine resistance,35,60.34,0.8833
+Basal cell carcinoma,24,100,0.9223
+Pathways in cancer,199,68.62,0.9331
+Human T-cell leukemia virus 1 infection,118,83.69,0.951
+Viral carcinogenesis,105,86.07,0.9448
+Acute myeloid leukemia,40,100,0.9385
+Glioma,27,58.7,0.9478
+Non-small cell lung cancer,28,63.64,0.9403
+Melanoma,25,62.5,0.9302
+RIG-I-like receptor signaling pathway,31,100,0.9176

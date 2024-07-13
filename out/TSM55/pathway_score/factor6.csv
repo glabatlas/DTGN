@@ -1,0 +1,55 @@
+pathway,nums,percent,pvalue
+Spliceosome,97,95.1,0
+DNA replication,33,100,0
+Ribosome,86,86,0
+Ribosome biogenesis in eukaryotes,50,89.29,0
+"Ribosome, eukaryotes",63,95.45,0
+Coronavirus disease - COVID-19,91,77.78,0
+Base excision repair,30,90.91,0
+Mismatch repair,22,100,0
+Homologous recombination,29,93.55,0
+Nuclear pore complex,26,86.67,0
+mRNA surveillance pathway,59,88.06,0
+Fanconi anemia pathway,27,84.38,0
+Nucleocytoplasmic transport,79,95.18,0
+Pyrimidine metabolism,63,88.73,0
+RNA transport,109,94.78,0
+RNA degradation,33,71.74,0.0001
+Nucleotide excision repair,36,85.71,0.0023
+Polycomb repressive complex,61,96.83,0.004
+Basal transcription factors,29,74.36,0.0041
+Cell cycle,128,98.46,0.0042
+Purine metabolism,89,92.71,0.0074
+Biosynthesis of amino acids,26,61.9,0.0237
+Cysteine and methionine metabolism,23,82.14,0.057
+Herpes simplex infection,85,90.43,0.0794
+Progesterone-mediated oocyte maturation,53,79.1,0.208
+Drug metabolism - other enzymes,25,62.5,0.2272
+Amyotrophic lateral sclerosis,139,72.02,0.3609
+Oocyte meiosis,61,78.21,0.3772
+Nucleotide metabolism,38,80.85,0.387
+Metabolic pathways,515,88.95,0.4139
+Viral life cycle - HIV-1,22,64.71,0.403
+Huntington's disease,67,62.04,0.4613
+Chemical carcinogenesis - receptor activation,63,61.76,0.5384
+Th17 cell differentiation,49,100,0.5458
+Glutathione metabolism,24,60,0.5962
+Drug metabolism - cytochrome P450,23,100,0.6338
+Signaling pathways regulating pluripotency of stem cells,59,74.68,0.6762
+Transcriptional misregulation in cancer,77,83.7,0.663
+Carbon metabolism,39,57.35,0.7144
+Citrate cycle (TCA cycle),21,100,0.8005
+Neutrophil extracellular trap formation,31,54.39,0.8304
+Metabolism of xenobiotics by cytochrome P450,26,100,0.9296
+Huntington disease,113,70.19,0.9321
+FoxO signaling pathway,41,53.95,0.9176
+Colorectal cancer,29,51.79,0.91
+Acute myeloid leukemia,23,57.5,0.8953
+Hippo signaling pathway,44,51.16,0.937
+Biosynthesis of cofactors,42,58.33,0.9299
+Ubiquitin mediated proteolysis,68,77.27,0.9575
+Hepatitis C,63,76.83,0.9887
+Prostate cancer,52,86.67,0.9977
+Breast cancer,53,73.61,0.9844
+Gastric cancer,54,75,0.9945
+Neuroactive ligand-receptor interaction,48,100,0.983
