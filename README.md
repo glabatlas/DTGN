@@ -104,13 +104,10 @@ How to use
 
 ## Eaxmple
 
-git this project directory
+1. git this project directory
+2. cd ./DTGN/
+3. run the command `python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --mean 0 --var 0 --encoder_layer 32,8,2 --encoder_layer 2,8,32`
 
-cd ./DTGN/
-
-```
-python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --mean 0 --var 0 --encoder_layer 32,8,2 --encoder_layer 2,8,32
-```
 ###
 - **--exp_path**: The path to the gene expression data.
 - **--net_path**: THe path to the TF-Gene network data.
