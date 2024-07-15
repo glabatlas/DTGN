@@ -69,7 +69,7 @@ Project Structure
 
 
 
-How to use
+How To Use
 --------------------------------------
 ## Trainnig Data Format
 

@@ -21,15 +21,16 @@ def delta_pcc(features, t, stage):
 
     total_delta = []
     total_pcc = []
+    z_score_list = []
     for i in range(d):
         perturbed_feat = np.concatenate((five_features, features[:, d * (t - 1) + i].reshape((-1, 1))), axis=1)
         pcc_perturbed = np.corrcoef(perturbed_feat)
         delta = pcc_perturbed - pcc_n
         total_delta.append(delta)
         total_pcc.append(pcc_n)
-
         eps = 1e-20
         z_score = delta / ((1 - pcc_n ** 2 + eps) / (N - 1))
+        z_score_list.append(z_score)
         if d == 1:
             # Using Z-test when d == 1
             p_value = stats.norm.sf(abs(z_score)) * 2
@@ -37,33 +38,17 @@ def delta_pcc(features, t, stage):
             # Using Chi-square test when d > 1
             k2 += z_score ** 2
 
-    from scipy.stats import pearsonr,spearmanr
-    def f(m):
-        dp1 = total_delta[0].flatten()
-        dp2 = total_delta[1].flatten()
-        num_elements = dp1.size
-        indices = np.random.choice(num_elements, m, replace=False)
-        sampled_values1 = dp1[indices]
-        sampled_values2 = dp2[indices]
-        # PCC
-        correlation, p_value = pearsonr(sampled_values1, sampled_values2)
-        # Spearmanr
-        # correlation, p_value = spearmanr(sampled_values1, sampled_values2)
-        print(m, correlation, p_value)
-
-    f(10)
-    f(100)
-    f(1000)
-    f(10000)
-    f(100000)
-    exit(0)
-
+    # The degree of freedom is d - 1
     if d > 1:
         p_value = stats.chi2.sf(k2, d - 1)
     return p_value, total_delta, total_pcc
 
 
 class GenePair:
+    """
+    The edges class with its significant value.
+    """
+
     def __init__(self, tf, gene, value):
         self.tf = tf
         self.gene = gene
@@ -132,6 +117,8 @@ def get_factor_grn(name, feats, edges, idx2sybol, stage, threshold):
         dataframe = pd.DataFrame(data)
         save_df(dataframe, f"./out/{name}/dynamicTGNs", f"factor{i}.csv", header=['Source', 'Target', 'PValue'])
 
+    # To draw the histograms of the delta pcc across all stages.
+    '''
     N = (feats.shape[1] // stage) * (stage - 1)
     alpha = 0.05
     delta = np.stack(total_delta, axis=0)
@@ -149,3 +136,4 @@ def get_factor_grn(name, feats, edges, idx2sybol, stage, threshold):
                                                  saved_path=f"./out/img")
     plot_standard_normal_with_highlighted_points(z_score, 1000, alpha=alpha, title=f"{name}-hist-1000points",
                                                  saved_path=f"./out/img")
+    '''

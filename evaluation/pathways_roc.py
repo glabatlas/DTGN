@@ -82,8 +82,8 @@ if __name__ == '__main__':
     draw_data = {}
 
 
-    fpr, tpr, auroc = pathway_roc(dataset, "tsm3", stage=7, type="min")
-    draw_data[f'tsm3: AUC={auroc}'] = (fpr, tpr)
+    fpr, tpr, auroc = pathway_roc(dataset, "tsm511", stage=7, type="min")
+    draw_data[f'tsm511: AUC={auroc}'] = (fpr, tpr)
 
     fpr, tpr, auroc = pathway_roc(dataset, "IPSC-32-m0v1", stage=7, type="min")
     draw_data[f'before: AUC={auroc}'] = (fpr, tpr)

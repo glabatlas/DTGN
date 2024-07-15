@@ -17,7 +17,7 @@ def remove_outliers(data, m=3):
     return filtered_data
 
 
-def draw_hist(delta, title, bins=100, alpha=0.05, sample_size=None, saved_path=None):
+def draw_hist(delta, title, bins=100, alpha=None, sample_size=None, saved_path=None):
     plt.clf()
     delta_flattened = delta.flatten()
     # Filter out non-finite values
@@ -42,15 +42,15 @@ def draw_hist(delta, title, bins=100, alpha=0.05, sample_size=None, saved_path=N
 
     # Draw the normal distribution curve in red dashed line
     plt.plot(x, p, 'r-', linewidth=2)
+    if alpha is not None:
+        # Calculate critical z-values for a two-tailed test with alpha = 0.05
+        z_critical_low = norm.ppf(alpha / 2, loc=mu, scale=std)
+        z_critical_high = norm.ppf(1 - alpha / 2, loc=mu, scale=std)
 
-    # Calculate critical z-values for a two-tailed test with alpha = 0.05
-    z_critical_low = norm.ppf(alpha / 2, loc=mu, scale=std)
-    z_critical_high = norm.ppf(1 - alpha / 2, loc=mu, scale=std)
-
-    plt.axvline(z_critical_low, color='green', linestyle='solid', linewidth=2,
-                label=f'Critical Low (z={z_critical_low:.2f})')
-    plt.axvline(z_critical_high, color='green', linestyle='solid', linewidth=2,
-                label=f'Critical High (z={z_critical_high:.2f})')
+        plt.axvline(z_critical_low, color='green', linestyle='solid', linewidth=2,
+                    label=f'Critical Low (z={z_critical_low:.2f})')
+        plt.axvline(z_critical_high, color='green', linestyle='solid', linewidth=2,
+                    label=f'Critical High (z={z_critical_high:.2f})')
 
 
     plt.title(title)
@@ -61,8 +61,9 @@ def draw_hist(delta, title, bins=100, alpha=0.05, sample_size=None, saved_path=N
         plt.savefig(f"{saved_path}/{title}.pdf", dpi=300)
     else:
         plt.show()
-
-    return z_critical_low, z_critical_high
+    if alpha is not None:
+        return z_critical_low, z_critical_high
+    return None,None
 
 
 def plot_standard_normal_with_highlighted_points(points, sample_size, alpha, title='Standard Normal Distribution',

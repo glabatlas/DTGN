@@ -84,7 +84,6 @@ if __name__ == '__main__':
     feats = np.array([row[1:] for row in exp])
     feats = torch.tensor(feats).squeeze()
     num_stages = feats.shape[1]
-
     # create the mapping beween symbol and index
     sybol2idx = {row[0]: index for index, row in enumerate(exp)}
     idx2sybal = {idx: sybol for sybol, idx in sybol2idx.items()}
