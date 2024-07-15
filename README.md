@@ -102,7 +102,7 @@ How To Use
 | ...    | ...    |
 
 
-## Eaxmple
+## Example
 
 **input data**: The time course gene expression data and TF-Gene network data. Please ensure that the data format is consistent with the description above.
 1. git this project directory

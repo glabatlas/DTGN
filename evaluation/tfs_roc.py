@@ -120,9 +120,10 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
 if __name__ == '__main__':
     # name = "IPSC-32-m0v1" #0.69
     # name = "IPSC-24-m0v1"
-    name = "IPSC-SSN"
+    # name = "IPSC-SSN"
+    name = "DREM4"
     # name = "TSM55" # 0.444
-    compare = False
+    compare = True
     permutation_path = f"../out/{name}/permutation"
     positive_tf_path = "../data/IPSC/valid_data/positive_tfs.csv"
     negative_tf_path = "../data/IPSC/valid_data/negative_tfs.csv"
