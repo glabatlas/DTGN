@@ -108,15 +108,18 @@ How To Use
 **input data**: The time course gene expression data and TF-Gene network data. Please ensure that the data format is consistent with the description above.
 1. git this project directory
 2. cd ./DTGN/
-3. run the command `python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --encoder_layer 2,8,16`
+3. run the command `python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16`
 
+- **--name**: The model name and output directory.
 - **--exp_path**: The path to the gene expression data.
 - **--net_path**: The path to the TF-Gene network data.
+- **--encoder_layer**: The encoder layer size.
+- **--decoder_layer**: The decoder layer size.
 
 
 ### Using an existing model
 **input data**: The time course gene expression data and TF-Gene network data. Please ensure that the data format is consistent with the description above.
 1. git this project directory
 2. cd ./DTGN/
-3. run the command `python main.py --name LR --train false --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --encoder_layer 2,8,16`
+3. run the command `python main.py --name LR --train false --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16`
 
