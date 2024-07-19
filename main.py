@@ -16,6 +16,7 @@ from model.PygGCN import GCNEncoder, GCNDecoder
 from factor_net.factor_grn import get_factor_grn
 from factor_net.permutation_test import diff_exp_test
 from train import train
+from utils.file_operation import save_df
 
 
 def seed_everything(seed):
@@ -60,6 +61,11 @@ def train_pyg_gcn(name, genes, feat, activation, lr, wd, epochs, device, encoder
     else:
         model = torch.load(f"./out/{name}/model.pth", map_location=device)
         hidden_feats = model.encoder(train_feat, train_edges).permute(1, 0, 2).reshape((train_feat.size(1), -1)).detach().numpy()
+        hidden_df = pd.DataFrame(hidden_feats)
+        hidden_df.insert(0, 'GeneSymbol', genes)
+        hidden_header = ['GeneSymbol'] + [f"feature_{i}" for i in range(hidden_df.shape[1] - 1)]
+        save_df(hidden_df, f"./out/{name}", "features.csv", header=hidden_header)
+
     return hidden_feats
 
 

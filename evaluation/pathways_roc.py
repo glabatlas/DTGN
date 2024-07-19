@@ -78,65 +78,12 @@ def pathway_roc(dataset, name, stage, type="min"):
 
 
 if __name__ == '__main__':
-    dataset = "iPSC"
+    dataset = "LR"
     draw_data = {}
 
 
-    # fpr, tpr, auroc = pathway_roc(dataset, "tsm511", stage=7, type="min")
-    # draw_data[f'tsm511: AUC={auroc}'] = (fpr, tpr)
-
-    fpr, tpr, auroc = pathway_roc(dataset, "IPSC-32-m0v1", stage=7, type="min")
+    fpr, tpr, auroc = pathway_roc(dataset, "LR", stage=7, type="min")
     draw_data[f'DTGN: AUC={auroc}'] = (fpr, tpr)
 
-
-    fpr, tpr, auroc = pathway_roc(dataset, "IPSC-SSN", stage=7, type="min")
-    draw_data[f'SSN: AUC={auroc}'] = (fpr, tpr)
-
-    # fpr, tpr, auroc = pathway_roc(dataset, "DTGN-p0.01", top=top)
-    # draw_data[f'p0.01: AUC={auroc}'] = (fpr, tpr)
-    #
-    # fpr, tpr, auroc = pathway_roc(dataset, "DTGN-p0.05", top=top)
-    # draw_data[f'p0.05: AUC={auroc}'] = (fpr, tpr)
-
-    # fpr, tpr, auroc = pathway_roc(dataset, "exp-p0.01")
-    # draw_data[f'Exp: AUC={auroc}'] = (fpr, tpr)
-
-    # tsm_list = ["tsm3-p0.01-3"]
-    # tsm_list = ["tsm5-p0.05"]
-    # tsm_list = []
-    # for t_id in tsm_list:
-    #     fpr, tpr, auroc = pathway_roc(dataset, t_id)
-    #     draw_data[f'{t_id}: AUC={auroc}'] = (fpr, tpr)
-    #
-    # fpr, tpr, auroc = pathway_roc(dataset, "drem4")
-    # draw_data[f'drem: AUC={auroc}'] = (fpr, tpr)
-    # #
-    # fpr, tpr, auroc = pathway_roc(dataset, "hclust")
-    # draw_data[f'hclust: AUC={auroc}'] = (fpr, tpr)
-    #
-    # fpr, tpr, auroc = pathway_roc(dataset, "kmean")
-    # draw_data[f'kmean: AUC={auroc}'] = (fpr, tpr)
-    #
-    # fpr, tpr, auroc = pathway_roc(dataset, "wgcna")
-    # draw_data[f'wgcna: AUC={auroc}'] = (fpr, tpr)
-
-    # fpr, tpr, auroc = pathway_roc(dataset, "stem")
-    # draw_data[f'stem: AUC={auroc}'] = (fpr, tpr)
-    '''
-    # TSMiner文章给出的pathway-pvalue画出的ROC，positive-pathway和negative-pathway用自己收集的数据
-    fpr, tpr, auroc = pathway_roc(dataset, "tsm3-paper", stage=10)
-    draw_data[f'tsm3-paper: AUC={auroc}'] = (fpr, tpr)
-    fpr, tpr, auroc = pathway_roc(dataset, "hclust-paper", stage=10)
-    draw_data[f'hclust-paper: AUC={auroc}'] = (fpr, tpr)
-    fpr, tpr, auroc = pathway_roc(dataset, "kmean-paper", stage=10)
-    draw_data[f'kmean-paper: AUC={auroc}'] = (fpr, tpr)
-    fpr, tpr, auroc = pathway_roc(dataset, "stem-paper", stage=10)
-    draw_data[f'stem-paper: AUC={auroc}'] = (fpr, tpr)
-    fpr, tpr, auroc = pathway_roc(dataset, "wgcna-paper", stage=10)
-    draw_data[f'wgcna-paper: AUC={auroc}'] = (fpr, tpr)
-    '''
-
-    # fpr, tpr, auroc = pathway_roc(dataset, run_id, is_tsm=True, stage=10)
-    # draw_data[f'TSM3-paper: AUC={auroc}'] = (fpr, tpr)
     draw_roc(draw_data, title=f"{dataset} KEGG ROC", smooth=False,
-             path=f"../out/img/pathway.png")
+             path=f"../out/img/KEGG.png")

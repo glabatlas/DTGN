@@ -69,9 +69,8 @@ def preprocessing(name, exp_path, net_path, mean, var, norm_type='id'):
 
     save_df(exp_df, f"./out/{name}/train_set", "exp.csv")
     save_df(edge_df, f"./out/{name}/train_set", "network.csv", header=["Source", "Target"])
-
-    # the datasets of LR, MI, HCV are filtered already.
-    if name not in {"LR", "MI", "HCV"}:
-        edges = graph.edges
-
-    return out_exp, edges
+    if mean <= 0 or var <= 0:
+        edges_out = edges_filter
+    else:
+        edges_out = graph.edges
+    return out_exp, edges_out
