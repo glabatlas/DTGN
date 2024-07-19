@@ -38,18 +38,15 @@ def preprocessing(name, exp_path, net_path, mean, var, norm_type='id'):
     """
     Filter gene expression based on mean and variance, ensuring the connectivity of the network.
     """
-
     edges = pd.read_csv(net_path).iloc[:, 0:2].values.tolist()
     all_tfs = {e[0] for e in edges}
     exp_data = pd.read_csv(exp_path).values
     exp_data = gene_filter(exp_data, mean, var)
     s2e = {row[0]: row[1:] for row in exp_data}
 
-    edges = [edge for edge in edges if edge[0] in s2e.keys() and edge[1] in s2e.keys()]
-
+    edges_filter = [edge for edge in edges if edge[0] in s2e.keys() and edge[1] in s2e.keys()]
     graph = nx.Graph()
-    graph.add_edges_from(edges)
-
+    graph.add_edges_from(edges_filter)
     # Obtain the maximum connected component
     nodes = sorted(nx.connected_components(graph), key=len, reverse=True)[0]
     graph = graph.subgraph(nodes)
@@ -72,6 +69,9 @@ def preprocessing(name, exp_path, net_path, mean, var, norm_type='id'):
 
     save_df(exp_df, f"./out/{name}/train_set", "exp.csv")
     save_df(edge_df, f"./out/{name}/train_set", "network.csv", header=["Source", "Target"])
-    if mean != 0 or var != 0:
+
+    # the datasets of LR, MI, HCV are filtered already.
+    if name not in {"LR", "MI", "HCV"}:
         edges = graph.edges
+
     return out_exp, edges

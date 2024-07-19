@@ -130,8 +130,8 @@ def args_parsing():
     parser.add_argument('--dataset', type=str, default="iPSC")
     parser.add_argument('--nums_stage', type=int, default=7)
     parser.add_argument('--pathway_path', type=str, default="../data/IPSC/pathways_genes.csv")
-    parser.add_argument('--permutation_times', type=int, default=5)
-    parser.add_argument('--name', type=str, default="IPSC-32-m0v1")
+    parser.add_argument('--permutation_times', type=int, default=200)
+    parser.add_argument('--name', type=str, default="iPSC-SSN")
     parser.add_argument('--threshold', type=float, default=0.05)
     return parser
 

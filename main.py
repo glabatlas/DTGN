@@ -85,10 +85,10 @@ if __name__ == '__main__':
     feats = torch.tensor(feats).squeeze()
     num_stages = feats.shape[1]
     # create the mapping beween symbol and index
-    sybol2idx = {row[0]: index for index, row in enumerate(exp)}
-    idx2sybal = {idx: sybol for sybol, idx in sybol2idx.items()}
+    symbol2idx = {row[0]: index for index, row in enumerate(exp)}
+    idx2symbol = {idx: symbol for symbol, idx in symbol2idx.items()}
     # convert symbol to index
-    edges = [[sybol2idx[edge[0]], sybol2idx[edge[1]]] for edge in edges]
+    edges = [[symbol2idx[edge[0]], symbol2idx[edge[1]]] for edge in edges]
     # create the dgl graph
     num_nodes = len(genes)
     g = create_network(edges, num_nodes)
@@ -99,7 +99,7 @@ if __name__ == '__main__':
                                  encoder_layer, decoder_layer, args.train)
     # Constructing the dynamic TF-Gene network for each stage.
     print("Constructing dynamic TGNs...")
-    get_factor_grn(args.name, hidden_feats, edges, idx2sybal, num_stages, args.threshold)
+    get_factor_grn(args.name, feats, edges, idx2symbol, num_stages, args.threshold)
 
     # Using permutation test to test the significance of the TFs.
     print("Permutation test...")
