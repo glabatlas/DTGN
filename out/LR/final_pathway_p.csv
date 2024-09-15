@@ -1,0 +1,137 @@
+label,value,term
+1,52.833333333333336,Bile secretion
+1,69.0,Pyrimidine metabolism
+1,81.5,Glutathione metabolism
+1,90.0,Insulin signaling pathway
+1,96.33333333333333,Calcium signaling pathway
+1,99.33333333333333,RNA transport
+1,101.33333333333333,Adherens junction
+1,102.5,PPAR signaling pathway
+1,103.0,Tight junction
+1,103.66666666666667,Purine metabolism
+1,105.83333333333333,Autophagy - animal
+1,109.16666666666667,Endocytosis
+1,125.0,Cell cycle
+1,133.0,Peroxisome
+1,157.33333333333334,Apoptosis
+1,159.33333333333334,cGMP-PKG signaling pathway
+1,160.5,Ribosome biogenesis in eukaryotes
+1,207.33333333333334,Cytokine-cytokine receptor interaction
+1,210.0,TNF signaling pathway
+1,210.16666666666666,Lysosome
+1,212.33333333333334,AMPK signaling pathway
+1,215.5,Insulin secretion
+1,216.16666666666666,Sphingolipid signaling pathway
+1,216.66666666666666,mTOR signaling pathway
+1,218.5,Oxidative phosphorylation
+1,220.0,Jak-STAT signaling pathway
+1,224.66666666666666,Toll-like receptor signaling pathway
+1,226.66666666666666,Focal adhesion
+1,234.33333333333334,MAPK signaling pathway
+1,239.33333333333334,Platelet activation
+1,253.66666666666666,Gap junction
+1,256.3333333333333,Pyruvate metabolism
+1,265.0,Chemokine signaling pathway
+1,267.1666666666667,Glycolysis / Gluconeogenesis
+1,273.5,ABC transporters
+0,276.6666666666667,"Spliceosome, U2-snRNP"
+1,279.3333333333333,Estrogen signaling pathway
+1,283.0,Glycerolipid metabolism
+0,298.6666666666667,Ubiquinone and other terpenoid-quinone biosynthesis
+1,300.3333333333333,T cell receptor signaling pathway
+0,305.0,Protein export
+1,323.3333333333333,DNA replication
+1,339.5,Activin signaling
+1,345.1666666666667,Wnt signaling
+0,350.5,"Fatty acid biosynthesis, elongation, endoplasmic reticulum"
+1,354.6666666666667,Urea cycle
+0,368.1666666666667,Aminoacyl-tRNA biosynthesis
+1,369.6666666666667,Hippo signaling
+1,374.1666666666667,RNA polymerase
+1,375.1666666666667,Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate
+0,380.3333333333333,"Aminoacyl-tRNA biosynthesis, eukaryotes"
+1,387.5,Nitrogen metabolism
+1,394.0,beta-Oxidation
+0,408.0,N-Glycan biosynthesis
+0,419.0,"Phosphatidylethanolamine (PE) biosynthesis, ethanolamine => PE"
+1,425.8333333333333,Renin-angiotensin system
+0,430.6666666666667,Methionine degradation
+1,438.0,Cytochrome c oxidase
+1,442.1666666666667,VEGF signaling pathway
+1,450.6666666666667,Circadian rhythm
+1,460.0,Proteasome
+0,465.5,HRD1/SEL1 ERAD complex
+1,474.0,TGF-beta signaling
+0,482.0,Glycosphingolipid biosynthesis - lacto and neolacto series
+1,482.8333333333333,p53 signaling pathway
+0,486.3333333333333,"Exosome, eukaryotes"
+0,490.8333333333333,N-glycosylation by oligosaccharyltransferase
+0,495.3333333333333,"Ubiquinone biosynthesis, eukaryotes, 4-hydroxybenzoate => ubiquinone"
+0,499.6666666666667,Shelterin complex
+0,500.0,Sm core complex
+0,502.0,"C21-Steroid hormone biosynthesis, progesterone => cortisol/cortisone"
+0,503.8333333333333,"Spliceosome, U1-snRNP"
+0,506.8333333333333,N-glycan precursor biosynthesis
+0,508.5,"GPI-anchor biosynthesis, core oligosaccharide"
+0,509.0,FA core complex
+0,511.6666666666667,"C19/C18-Steroid hormone biosynthesis, pregnenolone => androstenedione => estrone"
+1,512.6666666666666,DNA polymerase alpha / primase complex
+0,512.8333333333334,"Steroid hormone biosynthesis, cholesterol => prognenolone => progesterone"
+1,513.3333333333334,BMP signaling
+0,514.3333333333334,Mannose type O-glycan biosynthesis
+0,515.0,Other types of O-glycan biosynthesis
+0,517.5,"Nucleotide sugar biosynthesis, eukaryotes"
+0,531.1666666666666,"C1-unit interconversion, eukaryotes"
+0,561.0,Translocon-associated protein (TRAP) complex
+0,561.0,"Thyroid hormone biosynthesis, tyrosine => triiodothyronine/thyroxine"
+0,561.0,"Proline biosynthesis, glutamate => proline"
+0,561.0,"Melatonin biosynthesis, tryptophan => serotonin => melatonin"
+0,561.0,Lsm 2-8 complex
+0,561.0,Lactosylceramide biosynthesis
+0,561.0,"Inositol phosphate metabolism, Ins(1,3,4)P3 => phytate"
+0,561.0,TRAMP complex
+0,561.0,Glycosaminoglycan biosynthesis - keratan sulfate
+0,561.0,"Tyrosine degradation, tyrosine => homogentisate"
+0,561.0,Biotin metabolism
+0,561.0,"Nucleotide sugar biosynthesis, galactose => UDP-galactose"
+0,561.0,"Phenylalanine, tyrosine and tryptophan biosynthesis"
+0,561.0,Creatine pathway
+0,561.0,Ski complex
+0,561.0,GINS complex
+0,561.0,Lsm 1-7 complex
+0,561.0,"Pentose phosphate pathway, non-oxidative phase, fructose 6P => ribose 5P"
+0,561.0,"Catecholamine biosynthesis, tyrosine => dopamine => noradrenaline => adrenaline"
+0,561.0,Mucin type O-glycan biosynthesis
+0,561.0,"Sulfoglycolipids biosynthesis, ceramide/1-alkyl-2-acylglycerol => sulfatide/seminolipid"
+0,561.0,Virion - Flavivirus
+0,561.0,DNA polymerase gamma complex
+0,561.0,Decapping complex
+0,561.0,Bloom's syndrome complex
+0,561.0,N-glycan precursor trimming
+0,561.0,"Serine biosynthesis, glycerate-3P => serine"
+0,561.0,"Cysteine biosynthesis, homocysteine + serine => cysteine"
+0,561.0,Phosphonate and phosphinate metabolism
+0,561.0,p97-Ufd1-Npl4 complex
+0,561.0,"Glycosphingolipid biosynthesis, ganglio series, LacCer => GT3"
+0,561.0,"Coenzyme A biosynthesis, pantothenate => CoA"
+1,561.0,Notch signaling
+0,561.0,"Exosome, archaea"
+0,561.0,"Glycosaminoglycan biosynthesis, heparan sulfate backbone"
+0,561.0,"Cholesterol biosynthesis, squalene 2,3-epoxide => cholesterol"
+0,561.0,MRN complex
+0,561.0,Glycosylphosphatidylinositol (GPI)-anchor biosynthesis
+0,561.0,Sulfur relay system
+1,561.0,Hedgehog signaling
+0,561.0,"Glycosphingolipid biosynthesis, neolacto-series, LacCer => nLc4Cer"
+0,561.0,Sec61 complex
+0,561.0,"Glycosphingolipid biosynthesis, lacto-series, LacCer => Lc4Cer"
+0,561.0,"C21-Steroid hormone biosynthesis, progesterone => corticosterone/aldosterone"
+0,561.0,GABA (gamma-Aminobutyrate) shunt
+0,561.0,"Propanoyl-CoA metabolism, propanoyl-CoA => succinyl-CoA"
+0,561.0,"Phosphatidylcholine (PC) biosynthesis, choline => PC"
+0,561.0,"Glycosphingolipid biosynthesis, globo-series, LacCer => Gb4Cer"
+0,561.0,"N-glycan biosynthesis, complex type"
+0,561.0,"Valine, leucine and isoleucine biosynthesis"
+0,561.0,"O-glycan biosynthesis, mucin type core"
+0,561.0,Cholecalciferol biosynthesis
+0,561.0,"Phosphatidylcholine (PC) biosynthesis, PE => PC"

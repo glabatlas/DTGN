@@ -35,6 +35,7 @@ class GCNEncoder(nn.Module):
 
 
 class GCNDecoder(nn.Module):
+
     """
     Graph Convolutional Network (GCN) Decoder.
 

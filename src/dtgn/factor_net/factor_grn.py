@@ -2,10 +2,7 @@ import numpy as np
 import networkx as nx
 import pandas as pd
 from scipy import stats
-from utils.file_operation import save_df
-
-from utils.draw_pcc_hist import draw_hist, plot_standard_normal_with_highlighted_points
-
+from ..utils.file_operation import save_df
 
 def delta_pcc(features, t, stage):
     """
@@ -130,24 +127,3 @@ def get_factor_grn(name, feats, edges, idx2sybol, stage, threshold):
         construct_network(out_edges)
         dataframe = pd.DataFrame(data)
         save_df(dataframe, f"./out/{name}/dynamicTGNs", f"factor{i}.csv", header=['Source', 'Target', 'PValue'])
-
-    # To draw the histograms of the delta pcc across all stages.
-    '''
-    N = (feats.shape[1] // stage) * (stage - 1)
-    alpha = 0.05
-    delta = np.stack(total_delta, axis=0)
-    pcc = np.stack(total_pcc, axis=0)
-    z_critical_low, z_critical_high = draw_hist(delta, alpha=alpha, title=f"{name}-all", saved_path=f"./out/img")
-    delta_flattened = delta.flatten()
-    pcc_flattend = pcc.flatten()
-    extreme_values = delta_flattened[(delta_flattened <= z_critical_low) | (delta_flattened >= z_critical_high)]
-    extreme_pcc = pcc_flattend[(delta_flattened <= z_critical_low) | (delta_flattened >= z_critical_high)]
-    eps = 1e-20
-    z_score = extreme_values / ((1 - extreme_pcc ** 2 + eps) / (N - 1))
-    plot_standard_normal_with_highlighted_points(z_score, 10, alpha=alpha, title=f"{name}-hist-10points",
-                                                 saved_path=f"./out/img")
-    plot_standard_normal_with_highlighted_points(z_score, 100, alpha=alpha, title=f"{name}-hist-100points",
-                                                 saved_path=f"./out/img")
-    plot_standard_normal_with_highlighted_points(z_score, 1000, alpha=alpha, title=f"{name}-hist-1000points",
-                                                 saved_path=f"./out/img")
-    '''

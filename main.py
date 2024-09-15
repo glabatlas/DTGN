@@ -47,9 +47,10 @@ def create_network(link_pairs, num_nodes, bi_directed=True, add_loop=False):
     return g
 
 
-def train_pyg_gcn(name, genes, feat, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train):
+def train_pyg_gcn(name, genes, feat,edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train):
     train_edges = torch.tensor(edges).T
     train_feat = feat.T.unsqueeze(-1)
+
     train_feat, one_hot_pos = one_hot_encode(train_feat, encoder_layer[0])
 
     if is_train:
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     print(f"TF-Gene network: {g}")
     # training DTGN model
     print("Training...")
-    hidden_feats = train_pyg_gcn(args.name, genes, feats, activation, args.lr, args.wd, args.epochs, device,
+    hidden_feats = train_pyg_gcn(args.name, genes, feats,edges, activation, args.lr, args.wd, args.epochs, device,
                                  encoder_layer, decoder_layer, args.train)
     # Constructing the dynamic TF-Gene network for each stage.
     print("Constructing dynamic TGNs...")

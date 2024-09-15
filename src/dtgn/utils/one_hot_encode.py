@@ -22,6 +22,7 @@ def one_hot_encode(feat, num_intervals, origin_val=False):
     >>> feat = torch.tensor([[[0.1], [0.5]], [[0.2], [0.8]]])
     >>> one_hot_feat, one_hot_pos = one_hot_encode(feat, 5)
     """
+
     max_value = torch.max(feat)
     min_value = torch.min(feat)
     stage_nums = feat.shape[0]

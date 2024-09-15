@@ -5,8 +5,18 @@ import torch
 from tqdm import tqdm
 from torch_geometric.utils import negative_sampling
 import matplotlib.pyplot as plt
+
+import random
+import os
+import numpy as np
 import pandas as pd
-from utils.file_operation import save_df
+
+import torch
+import dgl
+from .utils.one_hot_encode import one_hot_encode
+from .model.MyGAE import MyGAE
+from .model.PygGCN import GCNEncoder, GCNDecoder
+from .utils.file_operation import save_df
 
 
 def loss_curve(name, data: dict, rate=1.0):
@@ -113,3 +123,54 @@ def train(name, model, genes, feat, edges, optim, device, epochs):
     loss_curve(name, loss_dict, rate=0.7)
 
     return hidden_feat.cpu().detach().numpy()
+
+
+def seed_everything(seed):
+    """
+    Setting the random seed for reproducibility.
+    """
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.cuda.empty_cache()
+
+
+def create_network(link_pairs, num_nodes, bi_directed=True, add_loop=False):
+    """
+    Create a dgl graph from a list of link pairs.
+    """
+    g = dgl.graph(link_pairs, num_nodes=num_nodes)
+    g = dgl.remove_self_loop(g)
+    if bi_directed:
+        g = dgl.to_bidirected(g)
+    if add_loop:
+        g = dgl.add_self_loop(g)
+    return g
+
+
+def train_pyg_gcn(name, genes, feat, edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train):
+    train_edges = torch.tensor(edges).T
+    train_feat = feat.T.unsqueeze(-1)
+    train_feat, one_hot_pos = one_hot_encode(train_feat, encoder_layer[0])
+
+    if is_train:
+        model = MyGAE(GCNEncoder(encoder_layer, activation=activation),
+                      GCNDecoder(decoder_layer, activation=activation))
+        optim = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd)
+        hidden_feats = train(name, model, genes, train_feat, train_edges, optim, device, epochs)
+        torch.save(model, f"./out/{name}/model.pth")
+    else:
+        model = torch.load(f"./out/{name}/model.pth", map_location=device)
+        hidden_feats = model.encoder(train_feat, train_edges).permute(1, 0, 2).reshape(
+            (train_feat.size(1), -1)).detach().numpy()
+        hidden_df = pd.DataFrame(hidden_feats)
+        hidden_df.insert(0, 'GeneSymbol', genes)
+        hidden_header = ['GeneSymbol'] + [f"feature_{i}" for i in range(hidden_df.shape[1] - 1)]
+        save_df(hidden_df, f"./out/{name}", "features.csv", header=hidden_header)
+
+    return hidden_feats

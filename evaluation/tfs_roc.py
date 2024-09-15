@@ -117,12 +117,18 @@ def draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_s
     plt.show()
 
 
-if __name__ == '__main__':
-    name = "HCV"
+def test(name,dataset):
     compare = False
     permutation_path = f"../out/{name}/permutation"
-    positive_tf_path = "../data/HCV/valid_data/positive_tfs.csv"
-    negative_tf_path = "../data/HCV/valid_data/negative_tfs.csv"
-    start_stage = 1
-    end_stage = 5
+    positive_tf_path = f"../data/{dataset}/valid_data/early_tf.csv"
+    negative_tf_path = f"../data/{dataset}/valid_data/later_tf.csv"
+    # positive_tf_path = f"../data/{dataset}/valid_data/positive_tfs.csv"
+    # negative_tf_path = f"../data/{dataset}/valid_data/negative_tfs.csv"
+    start_stage = 3
+    end_stage = 6
     draw_roc(name, permutation_path, positive_tf_path, negative_tf_path, start_stage, end_stage, top=-1, compare=compare)
+
+
+if __name__ == '__main__':
+    for id in [1,2,4,6,8,12,16]:
+        test(f"LR{id}", "LR")

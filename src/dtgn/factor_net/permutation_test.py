@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 from statsmodels.stats import multitest
-from utils.file_operation import save_df
+from ..utils.file_operation import save_df
 
 
 def permutation(list1, list2, permutation_times):

@@ -4,7 +4,7 @@
 import numpy as np
 import pandas as pd
 import networkx as nx
-from utils.file_operation import save_df
+from ..utils.file_operation import save_df
 
 
 def exp_normalize(exp, norm_type='id'):
@@ -56,6 +56,7 @@ def preprocessing(name, exp_path, net_path, mean, var, norm_type='id'):
     Example:
     >>> exp, edges = preprocessing("experiment", "./data/LR/exp.csv", "./data/LR/network.csv", 0.5, 0.1, norm_type='id')
     """
+
     edges = pd.read_csv(net_path).iloc[:, 0:2].values.tolist()
     all_tfs = {e[0] for e in edges}
     exp_data = pd.read_csv(exp_path).values
