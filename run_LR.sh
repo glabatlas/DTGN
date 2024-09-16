@@ -1,0 +1,8 @@
+python main.py --name LR1 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,1" --decoder_layer "1,8,16" --device gpu --epochs 3000
+#python main.py --name LR2 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,2" --decoder_layer "2,8,16" --device gpu --epochs 3000
+python main.py --name LR4 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,4" --decoder_layer "4,8,16" --device gpu --epochs 3000
+#python main.py --name LR6 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,6" --decoder_layer "6,8,16" --device gpu --epochs 3000
+python main.py --name LR8 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,8" --decoder_layer "8,8,16" --device gpu --epochs 3000
+#python main.py --name LR10 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,10" --decoder_layer "10,8,16" --device gpu --epochs 3000
+#python main.py --name LR12 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,12" --decoder_layer "12,8,16" --device gpu --epochs 3000
+#python main.py --name LR16 --mean 0 --var 0 --exp_path "./data/LR/exp.csv" --net_path "./data/LR/network.csv" --encoder_layer "16,8,16" --decoder_layer "16,8,16" --device gpu --epochs 3000
