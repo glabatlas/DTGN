@@ -222,8 +222,10 @@ decoder_layer = [2, 8, 16]
 lr = 0.001
 wd = 0.0005
 epochs = 100
+
 # The output name of the model
 name = "test_LR"
+
 # The input file path
 exp_path = "./data/LR/exp.csv"
 net_path = "./data/LR/network.csv"
@@ -232,31 +234,35 @@ net_path = "./data/LR/network.csv"
 exp, edges = dtgn.preprocessing(name, exp_path, net_path, 1, 0, "id")
 print(len(exp), len(edges))
 
+# Loading the data
 genes = [row[0] for row in exp]
 feats = np.array([row[1:] for row in exp])
 feats = torch.tensor(feats).squeeze()
 num_stages = feats.shape[1]
+
 # Constructing the dynamic TF-Gene network for each stage.
 symbol2idx = {row[0]: index for index, row in enumerate(exp)}
 idx2symbol = {idx: symbol for symbol, idx in symbol2idx.items()}
+
 # convert symbol to index
 edges = [[symbol2idx[edge[0]], symbol2idx[edge[1]]] for edge in edges]
+
 # create the dgl graph
 num_nodes = len(genes)
 g = dtgn.create_network(edges, num_nodes)
 print(f"TF-Gene network: {g}")
-# training DTGN model
-print("Training...")
 
 # train the model and obtain hidden features
 hidden_feats = dtgn.train_pyg_gcn(name, genes, feats, edges, activation, lr, wd, epochs, device,
                                   encoder_layer, decoder_layer, is_train)
+
 # using higher_learning to construct the dynamic GRNs
 dtgn.get_factor_grn(name, feats, edges, idx2symbol, num_stages, 0.01)
 
 # Using permutation test to test the significance of the TFs.
 print("Permutation test...")
 dtgn.diff_exp_test(name, num_stages, 10)
+
 # Finish!
 
 ```
