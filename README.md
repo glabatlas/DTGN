@@ -37,8 +37,28 @@ More detailed information can be found in the documentation comments of the meth
 
 ### dtgn.preprocessing()
 Filter gene expression based on mean and variance to ensure network connectivity.
+#### Parameters
 
-Example: 
+- **name (str)**: The name of the dataset or experiment for saving the model and output data.
+
+- **exp_path (str)**: The file path to the gene expression data.
+
+- **net_path (str)**: The file path to the TF-Gene network data.
+
+- **mean (float)**: The mean value used for filtering.
+
+- **var (float)**: The variance value used for filtering.
+
+- **norm_type (str, optional)**: The type of normalization to apply. Defaults to `'id'`. Options include:
+    - `'id'`: No normalization.
+    - `'zscore'`: Z-score normalization.
+    - `'minmax'`: Min-max scaling.
+
+#### Returns
+
+- **tuple**: A tuple containing the processed expression data and network edges.
+
+#### Example: 
 ```
 exp, edges = preprocessing("experiment", "./data/LR/exp.csv", "./data/LR/network.csv", 0.5, 0.1, norm_type='id')
 ```
@@ -46,7 +66,18 @@ exp, edges = preprocessing("experiment", "./data/LR/exp.csv", "./data/LR/network
 ### dtgn.one_hot_encode()
 Applies one-hot encoding to represent gene expression data.
 
-Example:
+#### Parameters:
+
+- **feat (torch.Tensor)**: A tensor containing the gene expression data with shape (T, N, 1).
+- **num_intervals (int)**: The number of intervals for encoding.
+- **origin_val (bool, optional)**: If True, use the original values for encoding; otherwise, use binary encoding. Defaults to False.
+
+#### Returns:
+- **tuple**: A tuple containing:
+        - one_hot_feat (torch.Tensor): The one-hot encoded feature tensor with shape (stage_nums, n, num_intervals).
+        - one_hot_pos (torch.Tensor): A tensor of interval indices with shape (stage_nums * n).
+
+#### Example:
 ```
 feat = torch.tensor([[[0.1], [0.5]], [[0.2], [0.8]]])
 one_hot_feat, one_hot_pos = one_hot_encode(feat, 5)
@@ -55,7 +86,11 @@ one_hot_feat, one_hot_pos = one_hot_encode(feat, 5)
 ### dtgn.MyGAE()
 The DTGN model, a Graph Autoencoder (GAE) for gene expression data.
 
-Example:
+#### Parameters:
+- **encoder (Module)**: The encoder neural network module.
+- **decoder (Module)**: The decoder neural network module.
+
+#### Example:
 ```
 encoder = GCNEncoder([64, 32, 16])
 decoder = GCNDecoder([16, 32, 64])
@@ -66,7 +101,11 @@ loss = model.total_loss(feat, z, edges)
 ### dtgn.GCNEncoder()
 Graph Convolutional Network (GCN) Encoder.
 
-Example:
+#### Parameters:
+- **hidden_list (list of int)**: A list specifying the number of units in each hidden layer.
+- **activation (callable, optional)**: The activation function to apply after each layer except the last. Defaults to nn.Sigmoid().
+
+#### Example:
 ```
 encoder = GCNEncoder([64, 32, 16])
 output = encoder(features, edge_index)
@@ -75,7 +114,11 @@ output = encoder(features, edge_index)
 ### dtgn.GCNDecoder()
 Graph Convolutional Network (GCN) Decoder.
 
-Example:
+#### Parameters:
+- **hidden_list (list of int)**: A list specifying the number of units in each hidden layer.
+- **activation (callable, optional)**: The activation function to apply after each layer except the last. Defaults to nn.ReLU().
+
+#### Example:
 ```
 decoder = GCNDecoder([16, 32, 64])
 output = decoder(features, edge_index)
@@ -84,7 +127,19 @@ output = decoder(features, edge_index)
 ### dtgn.get_factor_grn()
 Constructs the dynamic TF-Gene network for each stage.
 
-Example:
+#### Parameters:
+- **name (str)**: The name of the dataset or experiment.
+- **feats (Tensor)**: The features for each node.
+- **edges (Tensor)**: The edge indices.
+- **idx2sybol (dict)**: A mapping from index to symbol.
+- **stage (int)**: The number of stages to process.
+- **threshold (float)**: The threshold for filtering edges.
+
+#### Returns:
+- All outputs are saved in the "./out/{name}/dynamicTGNs" directory.
+
+#### Example:
+
 ```
 get_factor_grn("experiment", feats, edges, idx2sybol, 5, 0.05)
 ```
@@ -92,7 +147,24 @@ get_factor_grn("experiment", feats, edges, idx2sybol, 5, 0.05)
 ### dtgn.train_pyg_gcn()
 Trains or loads DTGN model using PyTorch Geometric.
 
-Example:
+#### Parameters:
+- **name (str)**: The name of the dataset or experiment.
+- **genes (list of str)**: List of gene symbols.
+- **feat (Tensor)**: The feature matrix.
+- **edges (list of tuples)**: List of edge connections.
+- **activation (callable)**: The activation function to use in the model.
+- **lr (float)**: Learning rate for the optimizer.
+- **wd (float)**: Weight decay for the optimizer.
+- **epochs (int)**: Number of training epochs.
+- **device (str)**: Device to run the model on ('cpu' or 'gpu').
+- **encoder_layer (list of int)**: Number of units in each layer of the encoder.
+- **decoder_layer (list of int)**: Number of units in each layer of the decoder.
+- **is_train (bool)**: Flag to indicate whether to train a new model or load an existing one.
+
+#### Returns:
+- np.ndarray: The hidden features extracted by the model.
+
+#### Example:
 ```
 hidden_feats = train_pyg_gcn("experiment", gene_list, features, edge_list, nn.ReLU(), 0.01, 0.0001, 100, 'gpu', [64, 32], [32, 64], True)
 ```
@@ -136,10 +208,12 @@ hidden_feats = train_pyg_gcn("experiment", gene_list, features, edge_list, nn.Re
 
 #### using the python script
 ```python
-import dtgn
+
 import torch
 import numpy as np
+import dtgn
 
+# Setting the trainning parameters.
 is_train = True
 activation = torch.nn.Sigmoid()
 device = torch.device("cpu")
@@ -156,8 +230,8 @@ net_path = "./data/LR/network.csv"
 
 # Preprocessing the data
 exp, edges = dtgn.preprocessing(name, exp_path, net_path, 1, 0, "id")
-
 print(len(exp), len(edges))
+
 genes = [row[0] for row in exp]
 feats = np.array([row[1:] for row in exp])
 feats = torch.tensor(feats).squeeze()
@@ -183,7 +257,7 @@ dtgn.get_factor_grn(name, feats, edges, idx2symbol, num_stages, 0.01)
 # Using permutation test to test the significance of the TFs.
 print("Permutation test...")
 dtgn.diff_exp_test(name, num_stages, 10)
-print("Finish!")
+# Finish!
 
 ```
 
