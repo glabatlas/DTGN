@@ -35,7 +35,7 @@ You can use the DTGN model in two ways:
 ## Key Method Documentation
 More detailed information can be found in the documentation comments of the method.
 
-### dtgn.preprocessing()
+### dtgn.preprocessing(name, exp_path, net_path, mean, var, norm_type='id')
 Filter gene expression based on mean and variance to ensure network connectivity.
 #### Parameters
 
@@ -63,7 +63,7 @@ Filter gene expression based on mean and variance to ensure network connectivity
 exp, edges = preprocessing("experiment", "./data/LR/exp.csv", "./data/LR/network.csv", 0.5, 0.1, norm_type='id')
 ```
 
-### dtgn.one_hot_encode()
+### dtgn.one_hot_encode(feat, num_intervals, origin_val=False)
 Applies one-hot encoding to represent gene expression data.
 
 #### Parameters:
@@ -83,7 +83,7 @@ feat = torch.tensor([[[0.1], [0.5]], [[0.2], [0.8]]])
 one_hot_feat, one_hot_pos = one_hot_encode(feat, 5)
 ```
 
-### dtgn.MyGAE()
+### dtgn.MyGAE(encoder, decoder)
 The DTGN model, a Graph Autoencoder (GAE) for gene expression data.
 
 #### Parameters:
@@ -98,7 +98,7 @@ model = MyGAE(encoder, decoder)
 loss = model.total_loss(feat, z, edges)
 ```
 
-### dtgn.GCNEncoder()
+### dtgn.GCNEncoder(hidden_list, activation=nn.Sigmoid())
 Graph Convolutional Network (GCN) Encoder.
 
 #### Parameters:
@@ -111,7 +111,7 @@ encoder = GCNEncoder([64, 32, 16])
 output = encoder(features, edge_index)
 ```
 
-### dtgn.GCNDecoder()
+### dtgn.GCNDecoder(hidden_list, activation=nn.Sigmoid())
 Graph Convolutional Network (GCN) Decoder.
 
 #### Parameters:
@@ -124,7 +124,7 @@ decoder = GCNDecoder([16, 32, 64])
 output = decoder(features, edge_index)
 ```
 
-### dtgn.get_factor_grn()
+### dtgn.get_factor_grn(name, feats, edges, idx2sybol, stage, threshold)
 Constructs the dynamic TF-Gene network for each stage.
 
 #### Parameters:
@@ -144,7 +144,7 @@ Constructs the dynamic TF-Gene network for each stage.
 get_factor_grn("experiment", feats, edges, idx2sybol, 5, 0.05)
 ```
 
-### dtgn.train_pyg_gcn()
+### dtgn.train_pyg_gcn(name, genes, feat,edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train)
 Trains or loads DTGN model using PyTorch Geometric.
 
 #### Parameters:
