@@ -16,10 +16,10 @@ pytorch 2.0.1;
 scikit-learn 1.2.2;   
 pyg 2.3.1;   
 networkx 3.1;   
-scipy>=1.10;
-tqdm>=4.64;
-matplotlib>=3.7;
-numpy 1.24.3;<br>
+scipy>=1.10;   
+tqdm>=4.64;   
+matplotlib>=3.7;   
+numpy 1.24.3;   
 pandas 1.5.3.
 
 How To Use
