@@ -244,19 +244,19 @@ num_stages = feats.shape[1]
 symbol2idx = {row[0]: index for index, row in enumerate(exp)}
 idx2symbol = {idx: symbol for symbol, idx in symbol2idx.items()}
 
-# convert symbol to index
+# Convert gene symbol to index for downstream processing.
 edges = [[symbol2idx[edge[0]], symbol2idx[edge[1]]] for edge in edges]
 
-# create the dgl graph
+# Create the dgl graph
 num_nodes = len(genes)
 g = dtgn.create_network(edges, num_nodes)
 print(f"TF-Gene network: {g}")
 
-# train the model and obtain hidden features
+# Train the model and obtain hidden features
 hidden_feats = dtgn.train_pyg_gcn(name, genes, feats, edges, activation, lr, wd, epochs, device,
                                   encoder_layer, decoder_layer, is_train)
 
-# using higher_learning to construct the dynamic GRNs
+# Using SSN method to construct the dynamic GRNs
 dtgn.get_factor_grn(name, feats, edges, idx2symbol, num_stages, 0.01)
 
 # Using permutation test to test the significance of the TFs.
