@@ -207,6 +207,8 @@ hidden_feats = train_pyg_gcn("experiment", gene_list, features, edge_list, nn.Re
 
 
 #### using the python script
+Download the [dtgn.whl](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0-py3-none-any.whl)
+ or [dtgn.tar.gz](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0.tar.gz) and install via pip: `pip install DTGN.whl` or `pip install DTGN.tar.gz`
 ```python
 
 import torch
