@@ -94,7 +94,7 @@ python main.py --name LR --train false --exp_path ./data/LR/exp.csv --net_path .
 
 #### Gene Expression Data
 
-- **Header Row**: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as TimePoint1, TimePoint2, ..., TimePointN.
+- **Header Row**: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as time1, time2, ..., timeN.
 - **Data Rows**: Each subsequent row represents the expression data for a specific gene at different time points.
 
 | geneSymbol | time1 | time2 | time3 | time4 | ... | timeN |
