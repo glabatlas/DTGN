@@ -11,7 +11,7 @@ Dependencies
 The following are the necessary dependencies and recommended versions. The version of Python depends on your CUDA version and PyTorch version. Please refer to: https://pytorch.org/get-started/locally/
 
 
-python 3.6+;   
+python>=3.8;   
 pytorch 2.0.1;   
 scikit-learn 1.2.2;   
 pyg 2.3.1;   
@@ -24,7 +24,6 @@ pandas 1.5.3.
 
 How To Use
 --------------------------------------
-
 ## Installation
 
 You can use the DTGN model in two ways:
@@ -32,12 +31,106 @@ You can use the DTGN model in two ways:
 2. Download the [dtgn.whl](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0-py3-none-any.whl)
  or [dtgn.tar.gz](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0.tar.gz) and install via pip: `pip install DTGN.whl` or `pip install DTGN.tar.gz`
 
-## Key Method Documentation
+
+## Example
+
+### Using the python package
+
+Step 1: Download the [dtgn.whl](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0-py3-none-any.whl)
+ or [dtgn.tar.gz](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0.tar.gz) and install via pip: `pip install DTGN.whl` or `pip install DTGN.tar.gz`
+
+Step 2: Filter the data
+```python
+exp, edges = dtgn.preprocessing("test_LR", "./data/LR/exp.csv", "./data/LR/network.csv", 1, 0, "id")
+```
+
+Step 3: Train the model
+```python
+genes = [row[0] for row in exp]
+feats = np.array([row[1:] for row in exp])
+hidden_feats = dtgn.train_pyg_gcn("test_LR", genes, feats, edges, activation, lr, wd, epochs, device,
+                                  encoder_layer, decoder_layer, is_train)
+```
+
+Step 4: Cnstruct the dynamic GRNs
+```python
+symbol2idx = {row[0]: index for index, row in enumerate(exp)}
+idx2symbol = {idx: symbol for symbol, idx in symbol2idx.items()}
+dtgn.get_factor_grn(name, feats, edges, idx2symbol, num_stages, 0.01)
+```
+
+Step 5: Predict the phenotype-related TFs
+```python
+dtgn.diff_exp_test("test_LR", num_stages, 2000)
+```
+
+### Using command line
+**input data**: The time course gene expression data and TF-Gene network data. Please ensure that the data format is consistent with the description above.
+
+Step 1: git this project directory
+
+Step 2: cd ./DTGN/
+
+Step 3: run the command as follows:
+
+Training a new model
+```
+python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16`
+```
+
+Using the exist model
+```
+python main.py --name LR --train false --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16`
+```
+
+- **--name**: The model name and output directory.
+- **--exp_path**: The path to the gene expression data.
+- **--net_path**: The path to the TF-Gene network data.
+- **--encoder_layer**: The encoder layer size.
+- **--decoder_layer**: The decoder layer size.
+
+
+### Trainnig Data Format
+
+#### Gene Expression Data
+
+- **Header Row**: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as TimePoint1, TimePoint2, ..., TimePointN.
+- **Data Rows**: Each subsequent row represents the expression data for a specific gene at different time points.
+
+| geneSymbol | time1 | time2 | time3 | time4 | ... | timeN |
+|------------|-------|-------|-------|-------|-----|-------|
+| g1         | 2.3   | 2.5   | 2.7   | 2.8   | ... | 3.0   |
+| g2         | 1.1   | 1.3   | 1.4   | 1.5   | ... | 1.6   |
+| g3         | 0.5   | 0.6   | 0.7   | 0.8   | ... | 0.9   |
+| g4         | 3.2   | 3.3   | 3.5   | 3.6   | ... | 3.8   |
+| ...        | ...   | ...   | ...   | ...   | ... | ...   |
+| gN         | 4.1   | 4.2   | 4.3   | 4.4   | ... | 4.5   |
+
+#### TF-Gene Network Data
+
+- **Header Row**: The first row contains the column headers: source and target.
+- **Data Rows**: Each subsequent row represents an edge in the network.
+
+| source | target |
+|--------|--------|
+| Phf5a  | Fgf1   |
+| Phf5a  | Nrbp2  |
+| Phf5a  | Kat2b  |
+| g1     | g2     |
+| g2     | g3     |
+| ...    | ...    |
+
+
+
+## Documentation
+
+### API Documentation
 More detailed information can be found in the documentation comments of the method.
 
-### dtgn.preprocessing(name, exp_path, net_path, mean, var, norm_type='id')
+#### 1. dtgn.preprocessing(name, exp_path, net_path, mean, var, norm_type='id')
 Filter gene expression based on mean and variance to ensure network connectivity.
-#### Parameters
+
+Parameters
 
 - **name (str)**: The name of the dataset or experiment for saving the model and output data.
 
@@ -54,43 +147,44 @@ Filter gene expression based on mean and variance to ensure network connectivity
     - `'zscore'`: Z-score normalization.
     - `'minmax'`: Min-max scaling.
 
-#### Returns
+Returns
 
 - **tuple**: A tuple containing the processed expression data and network edges.
 
-#### Example: 
+Example: 
+
 ```python
 exp, edges = preprocessing("experiment", "./data/LR/exp.csv", "./data/LR/network.csv", 0.5, 0.1, norm_type='id')
 ```
 
-### dtgn.one_hot_encode(feat, num_intervals, origin_val=False)
+#### 2. dtgn.one_hot_encode(feat, num_intervals, origin_val=False)
 Applies one-hot encoding to represent gene expression data.
 
-#### Parameters:
+Parameters:
 
 - **feat (torch.Tensor)**: A tensor containing the gene expression data with shape (T, N, 1).
 - **num_intervals (int)**: The number of intervals for encoding.
 - **origin_val (bool, optional)**: If True, use the original values for encoding; otherwise, use binary encoding. Defaults to False.
 
-#### Returns:
+Returns:
 - **tuple**: A tuple containing:
         - one_hot_feat (torch.Tensor): The one-hot encoded feature tensor with shape (stage_nums, n, num_intervals).
         - one_hot_pos (torch.Tensor): A tensor of interval indices with shape (stage_nums * n).
 
-#### Example:
+Example:
 ```python
 feat = torch.tensor([[[0.1], [0.5]], [[0.2], [0.8]]])
 one_hot_feat, one_hot_pos = one_hot_encode(feat, 5)
 ```
 
-### dtgn.MyGAE(encoder, decoder)
+#### 3. dtgn.MyGAE(encoder, decoder)
 The DTGN model, a Graph Autoencoder (GAE) for gene expression data.
 
-#### Parameters:
+Parameters:
 - **encoder (Module)**: The encoder neural network module.
 - **decoder (Module)**: The decoder neural network module.
 
-#### Example:
+Example:
 ```python
 encoder = GCNEncoder([64, 32, 16])
 decoder = GCNDecoder([16, 32, 64])
@@ -98,36 +192,36 @@ model = MyGAE(encoder, decoder)
 loss = model.total_loss(feat, z, edges)
 ```
 
-### dtgn.GCNEncoder(hidden_list, activation=nn.Sigmoid())
+#### 4. dtgn.GCNEncoder(hidden_list, activation=nn.Sigmoid())
 Graph Convolutional Network (GCN) Encoder.
 
-#### Parameters:
+Parameters:
 - **hidden_list (list of int)**: A list specifying the number of units in each hidden layer.
 - **activation (callable, optional)**: The activation function to apply after each layer except the last. Defaults to nn.Sigmoid().
 
-#### Example:
+Example:
 ```python
 encoder = GCNEncoder([64, 32, 16])
 output = encoder(features, edge_index)
 ```
 
-### dtgn.GCNDecoder(hidden_list, activation=nn.Sigmoid())
+#### 5. dtgn.GCNDecoder(hidden_list, activation=nn.Sigmoid())
 Graph Convolutional Network (GCN) Decoder.
 
-#### Parameters:
+Parameters:
 - **hidden_list (list of int)**: A list specifying the number of units in each hidden layer.
 - **activation (callable, optional)**: The activation function to apply after each layer except the last. Defaults to nn.ReLU().
 
-#### Example:
+Example:
 ```python
 decoder = GCNDecoder([16, 32, 64])
 output = decoder(features, edge_index)
 ```
 
-### dtgn.get_factor_grn(name, feats, edges, idx2sybol, stage, threshold)
+#### 6. dtgn.get_factor_grn(name, feats, edges, idx2sybol, stage, threshold)
 Constructs the dynamic TF-Gene network for each stage.
 
-#### Parameters:
+Parameters:
 - **name (str)**: The name of the dataset or experiment.
 - **feats (Tensor)**: The features for each node.
 - **edges (Tensor)**: The edge indices.
@@ -135,18 +229,18 @@ Constructs the dynamic TF-Gene network for each stage.
 - **stage (int)**: The number of stages to process.
 - **threshold (float)**: The threshold for filtering edges.
 
-#### Returns:
+Returns:
 - All outputs are saved in the "./out/{name}/dynamicTGNs" directory.
 
-#### Example:
+Example:
 ```python
 get_factor_grn("experiment", feats, edges, idx2sybol, 5, 0.05)
 ```
 
-### dtgn.train_pyg_gcn(name, genes, feat,edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train)
+#### 7. dtgn.train_pyg_gcn(name, genes, feat,edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train)
 Trains or loads DTGN model using PyTorch Geometric.
 
-#### Parameters:
+Parameters:
 - **name (str)**: The name of the dataset or experiment.
 - **genes (list of str)**: List of gene symbols.
 - **feat (Tensor)**: The feature matrix.
@@ -160,204 +254,15 @@ Trains or loads DTGN model using PyTorch Geometric.
 - **decoder_layer (list of int)**: Number of units in each layer of the decoder.
 - **is_train (bool)**: Flag to indicate whether to train a new model or load an existing one.
 
-#### Returns:
+Returns:
 - np.ndarray: The hidden features extracted by the model.
 
-#### Example:
+Example:
 ```python
 hidden_feats = train_pyg_gcn("experiment", gene_list, features, edge_list, nn.ReLU(), 0.01, 0.0001, 100, 'gpu', [64, 32], [32, 64], True)
 ```
 
-
-## Trainnig Data Format
-
-### Gene Expression Data
-
-- **Header Row**: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as TimePoint1, TimePoint2, ..., TimePointN.
-- **Data Rows**: Each subsequent row represents the expression data for a specific gene at different time points.
-
-| geneSymbol | TimePoint1 | TimePoint2 | TimePoint3 | TimePoint4 | ... | TimePointN |
-|------------|-------------|-------------|-------------|-------------|-----|-------------|
-| GeneA      | 2.3         | 2.5         | 2.7         | 2.8         | ... | 3.0         |
-| GeneB      | 1.1         | 1.3         | 1.4         | 1.5         | ... | 1.6         |
-| GeneC      | 0.5         | 0.6         | 0.7         | 0.8         | ... | 0.9         |
-| GeneD      | 3.2         | 3.3         | 3.5         | 3.6         | ... | 3.8         |
-| ...        | ...         | ...         | ...         | ...         | ... | ...         |
-| GeneN      | 4.1         | 4.2         | 4.3         | 4.4         | ... | 4.5         |
-
-### TF-Gene Network Data
-
-- **Header Row**: The first row contains the column headers: source and target.
-- **Data Rows**: Each subsequent row represents an edge in the network.
-
-| source | target |
-|--------|--------|
-| Phf5a  | Fgf1   |
-| Phf5a  | Nrbp2  |
-| Phf5a  | Kat2b  |
-| GeneA  | GeneB  |
-| GeneC  | GeneD  |
-| ...    | ...    |
-
-
-## Example
-
-### Training a new model
-
-
-#### using the python script
-1. Download the [dtgn.whl](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0-py3-none-any.whl)
- or [dtgn.tar.gz](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0.tar.gz) and install via pip: `pip install DTGN.whl` or `pip install DTGN.tar.gz`
-
-2. Filter the data
-```python
-exp, edges = dtgn.preprocessing("test_LR", "./data/LR/exp.csv", "./data/LR/network.csv", 1, 0, "id")
-```
-
-3. Train the model
-```python
-genes = [row[0] for row in exp]
-feats = np.array([row[1:] for row in exp])
-hidden_feats = dtgn.train_pyg_gcn("test_LR", genes, feats, edges, activation, lr, wd, epochs, device,
-                                  encoder_layer, decoder_layer, is_train)
-```
-
-4. Cnstruct the dynamic GRNs
-```python
-symbol2idx = {row[0]: index for index, row in enumerate(exp)}
-idx2symbol = {idx: symbol for symbol, idx in symbol2idx.items()}
-dtgn.get_factor_grn(name, feats, edges, idx2symbol, num_stages, 0.01)
-```
-
-5. Predict the phenotype-related TFs
-```python
-dtgn.diff_exp_test("test_LR", num_stages, 2000)
-```
-
-[//]: # (```python)
-
-[//]: # ()
-[//]: # (import torch)
-
-[//]: # (import numpy as np)
-
-[//]: # (import dtgn)
-
-[//]: # ()
-[//]: # (# Setting the trainning parameters.)
-
-[//]: # (is_train = True)
-
-[//]: # (activation = torch.nn.Sigmoid&#40;&#41;)
-
-[//]: # (device = torch.device&#40;"cpu"&#41;)
-
-[//]: # (encoder_layer = [16, 8, 2])
-
-[//]: # (decoder_layer = [2, 8, 16])
-
-[//]: # (lr = 0.001)
-
-[//]: # (wd = 0.0005)
-
-[//]: # (epochs = 100)
-
-[//]: # ()
-[//]: # (# The output name of the model)
-
-[//]: # (name = "test_LR")
-
-[//]: # ()
-[//]: # (# The input file path)
-
-[//]: # (exp_path = "./data/LR/exp.csv")
-
-[//]: # (net_path = "./data/LR/network.csv")
-
-[//]: # ()
-[//]: # (# Preprocessing the data)
-
-[//]: # (exp, edges = dtgn.preprocessing&#40;name, exp_path, net_path, 1, 0, "id"&#41;)
-
-[//]: # (print&#40;len&#40;exp&#41;, len&#40;edges&#41;&#41;)
-
-[//]: # ()
-[//]: # (# Loading the data)
-
-[//]: # (genes = [row[0] for row in exp])
-
-[//]: # (feats = np.array&#40;[row[1:] for row in exp]&#41;)
-
-[//]: # (feats = torch.tensor&#40;feats&#41;.squeeze&#40;&#41;)
-
-[//]: # (num_stages = feats.shape[1])
-
-[//]: # ()
-[//]: # (# Constructing the dynamic TF-Gene network for each stage.)
-
-[//]: # (symbol2idx = {row[0]: index for index, row in enumerate&#40;exp&#41;})
-
-[//]: # (idx2symbol = {idx: symbol for symbol, idx in symbol2idx.items&#40;&#41;})
-
-[//]: # ()
-[//]: # (# Convert gene symbol to index for downstream processing.)
-
-[//]: # (edges = [[symbol2idx[edge[0]], symbol2idx[edge[1]]] for edge in edges])
-
-[//]: # ()
-[//]: # (# Create the dgl graph)
-
-[//]: # (num_nodes = len&#40;genes&#41;)
-
-[//]: # (g = dtgn.create_network&#40;edges, num_nodes&#41;)
-
-[//]: # (print&#40;f"TF-Gene network: {g}"&#41;)
-
-[//]: # ()
-[//]: # (# Train the model and obtain hidden features)
-
-[//]: # (hidden_feats = dtgn.train_pyg_gcn&#40;name, genes, feats, edges, activation, lr, wd, epochs, device,)
-
-[//]: # (                                  encoder_layer, decoder_layer, is_train&#41;)
-
-[//]: # ()
-[//]: # (# Using SSN method to construct the dynamic GRNs)
-
-[//]: # (dtgn.get_factor_grn&#40;name, feats, edges, idx2symbol, num_stages, 0.01&#41;)
-
-[//]: # ()
-[//]: # (# Using permutation test to test the significance of the TFs.)
-
-[//]: # (print&#40;"Permutation test..."&#41;)
-
-[//]: # (dtgn.diff_exp_test&#40;name, num_stages, 2000&#41;)
-
-[//]: # (# Finish!)
-
-[//]: # ()
-[//]: # (```)
-
-#### using command line
-**input data**: The time course gene expression data and TF-Gene network data. Please ensure that the data format is consistent with the description above.
-1. git this project directory
-2. cd ./DTGN/
-3. run the command `python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16`
-
-- **--name**: The model name and output directory.
-- **--exp_path**: The path to the gene expression data.
-- **--net_path**: The path to the TF-Gene network data.
-- **--encoder_layer**: The encoder layer size.
-- **--decoder_layer**: The decoder layer size.
-
-
-### Using an existing model
-**input data**: The time course gene expression data and TF-Gene network data. Please ensure that the data format is consistent with the description above.
-1. git this project directory
-2. cd ./DTGN/
-3. run the command `python main.py --name LR --train false --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16`
-
-Project Structure
--------------------------------------
+### Project Structure
 
 - **`main.py`**: The main entry point of the application.
 - **`train.py`**: The function to train the model.

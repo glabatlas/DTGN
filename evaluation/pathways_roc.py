@@ -81,7 +81,6 @@ if __name__ == '__main__':
     dataset = "LR"
     draw_data = {}
 
-
     fpr, tpr, auroc = pathway_roc(dataset, "LR", stage=7, type="min")
     draw_data[f'DTGN: AUC={auroc}'] = (fpr, tpr)
 

@@ -13,6 +13,7 @@ from utils.pathway_utils import read_pathway
 This script is used to calculate the pathway-TF score.
 """
 
+
 def time_specific_network(path):
     """
     Get the time-specific network.
@@ -122,7 +123,8 @@ def tf_pathway_score(dataset, name, pathway_path, nums_stage=10, threshold=0.05,
 
         pathway_tf_score = sorted(new_results, key=lambda x: x[3])
         dataframe = pd.DataFrame(pathway_tf_score, columns=["pathway", "nums", "percent", "pvalue"])
-        save_df(dataframe, f"../out/{name}/pathway_score", f"factor{i + 1}.csv",header=["pathway", "nums", "percent", "pvalue"])
+        save_df(dataframe, f"../out/{name}/pathway_score", f"factor{i + 1}.csv",
+                header=["pathway", "nums", "percent", "pvalue"])
 
 
 def args_parsing():
