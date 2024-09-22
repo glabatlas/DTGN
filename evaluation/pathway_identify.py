@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import pandas as pd
 import networkx as nx
@@ -8,6 +9,8 @@ import argparse
 from utils.TGMI import triple_interaction, discretize
 from utils.file_operation import save_df
 from utils.pathway_utils import read_pathway
+
+
 
 """
 This script is used to calculate the pathway-TF score.
@@ -129,11 +132,11 @@ def tf_pathway_score(dataset, name, pathway_path, nums_stage=10, threshold=0.05,
 
 def args_parsing():
     parser = argparse.ArgumentParser(description='Parsing args on main.py')
-    parser.add_argument('--dataset', type=str, default="iPSC")
-    parser.add_argument('--nums_stage', type=int, default=7)
-    parser.add_argument('--pathway_path', type=str, default="../data/IPSC/pathways_genes.csv")
+    parser.add_argument('--dataset', type=str, default="HCV")
+    parser.add_argument('--nums_stage', type=int, default=5)
+    parser.add_argument('--pathway_path', type=str, default="../data/HCV/pathways_genes.csv")
     parser.add_argument('--permutation_times', type=int, default=200)
-    parser.add_argument('--name', type=str, default="iPSC-SSN")
+    parser.add_argument('--name', type=str, default="HCV8")
     parser.add_argument('--threshold', type=float, default=0.05)
     return parser
 
@@ -148,5 +151,15 @@ if __name__ == '__main__':
     permutation_times = args.permutation_times
     threshold = args.threshold
 
+    start_time = time.time()
+
     tf_pathway_score(dataset, name, pathway_path=pathway_path, nums_stage=nums_stage, threshold=threshold,
                      permutation_times=permutation_times)
+
+
+    tf_pathway_score(dataset, "HCV16", pathway_path=pathway_path, nums_stage=nums_stage, threshold=threshold,
+                     permutation_times=permutation_times)
+
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Elapsed time: {elapsed_time:.4f} seconds")

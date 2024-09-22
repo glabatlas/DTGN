@@ -55,6 +55,6 @@ def create_tfs(name, pos_tfs_path, pos_pathways_path, pathway_path, out_path, mi
 
 if __name__ == '__main__':
     min_overlap = 4
-    create_tfs("IPSC", "../data/IPSC/valid_data/related_tfs.csv",
-               "../data/IPSC/valid_data/positive_pathways.csv",
-               "../data/IPSC/pathways_genes.csv", "../data/IPSC/valid_data", min_overlap)
+    create_tfs("IPSC", "../history_code/IPSC/valid_data/related_tfs.csv",
+               "../history_code/IPSC/valid_data/positive_pathways.csv",
+               "../history_code/IPSC/pathways_genes.csv", "../history_code/IPSC/valid_data", min_overlap)

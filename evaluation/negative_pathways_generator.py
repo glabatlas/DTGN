@@ -40,5 +40,5 @@ def create_negative_pathways(name, positive_pathway_path, pathway_path, out_path
 
 if __name__ == '__main__':
     min_overlap = 4
-    create_negative_pathways("IPSC", "../data/IPSC/valid_data/positive_pathways.csv",
-                             "../data/IPSC/pathways_genes.csv", "../data/IPSC/valid_data", min_overlap)
+    create_negative_pathways("IPSC", "../history_code/IPSC/valid_data/positive_pathways.csv",
+                             "../history_code/IPSC/pathways_genes.csv", "../history_code/IPSC/valid_data", min_overlap)
