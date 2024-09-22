@@ -219,7 +219,7 @@ Graph Convolutional Network (GCN) Encoder.
 - **hidden_list (list of int)**: A list specifying the number of units in each hidden layer.
 - **activation (callable, optional)**: The activation function to apply after each layer except the last. Defaults to nn.Sigmoid().
 
-**Example:**
+### Example:
 ```python
 encoder = GCNEncoder([64, 32, 16])
 output = encoder(features, edge_index)
