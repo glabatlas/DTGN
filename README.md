@@ -37,9 +37,16 @@ You can use the DTGN model in two ways:
 ### 3.2.1 Using the python package
 
 - Step 1: Download the [dtgn.whl](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0-py3-none-any.whl)
- or [dtgn.tar.gz](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0.tar.gz) and install via pip: `pip install DTGN.whl` or `pip install DTGN.tar.gz`
+ or [dtgn.tar.gz](https://github.com/glabatlas/DTGN/tree/main/dist/dtgn-1.0.0.tar.gz) and install via pip: 
+  ```bash
+  pip install DTGN.whl 
+  ```
+  or
+  ```bash
+  pip install DTGN.tar.gz
+  ```
 
-- Step 2: Download the data from [here](https://github.com/glabatlas/DTGN/tree/main/data) and add the data to the project directory.
+- Step 2: Download the data from [data](https://github.com/glabatlas/DTGN/tree/main/data) and [out](https://github.com/glabatlas/DTGN/tree/main/out), then add them to the project directory.
 
 - Step 3: Train or load the model
   - Train a new model
@@ -50,15 +57,23 @@ You can use the DTGN model in two ways:
   ```bash
   dtgn-train --name LR --num_stages 10 --train false --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16
   ```
-  - For different datasets, the number of stages, encoder layers, and decoder layers vary. The first parameter of the encoder and the last parameter of the decoder remain consistent, representing the size of the one-hot encoding dimension. Details are listed below:
+  - There are several primary parameters. For details, use `dtgn-train --help`.
+    - **--name**: The model name and output directory.
+    - **--exp_path**: The path to the gene expression data.
+    - **--net_path**: The path to the TF-Gene network data.
+    - **--num_stages**: The number of stages.
+    - **--epochs**: The number of training epochs.
+    - **--encoder_layer**: The encoder layer size.
+    - **--decoder_layer**: The decoder layer size.
+    - For different datasets, the number of stages, encoder layers, and decoder layers vary. The first parameter of the encoder and the last parameter of the decoder remain consistent, representing the size of the one-hot encoding dimension. Details are listed below:
   
-    |     | num_stages | encoder_layer | decoder_layer |
-    |-----|------------|---------------|---------------|
-    | LR  | 10         | 16,8,2        | 2,8,16        |
-    | MI  | 6          | 32,8,2        | 2,8,32        |
-    | HCV | 5          | 24,8,2        | 2,8,24        |
+      |     | num_stages | encoder_layer | decoder_layer |
+      |-----|------------|---------------|---------------|
+      | LR  | 10         | 16,8,2        | 2,8,16        |
+      | MI  | 6          | 32,8,2        | 2,8,32        |
+      | HCV | 5          | 24,8,2        | 2,8,24        |
 
-- Step 4: The output files are stored in the out/{name} directory.
+- Step 4: The output files are stored in the "./out/name/" directory.
 
 
 ### 3.2.2 Using command line
@@ -70,22 +85,32 @@ You can use the DTGN model in two ways:
 
 - Step 3: run the command as follows:
 
-  Training a new model
+  - Train a new model
   ```bash
   python main.py --name LR --train true --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16
   ```
 
-  Using the exist model
+  - Load the exist model
   ```bash
   python main.py --name LR --train false --exp_path ./data/LR/exp.csv --net_path ./data/LR/network.csv --encoder_layer 16,8,2 --decoder_layer 2,8,16
   ```
+  - There are several primary parameters. For details, use `python main.py --help`.
+    - **--name**: The model name and output directory.
+    - **--exp_path**: The path to the gene expression data.
+    - **--net_path**: The path to the TF-Gene network data.
+    - **--num_stages**: The number of stages.
+    - **--epochs**: The number of training epochs.
+    - **--encoder_layer**: The encoder layer size.
+    - **--decoder_layer**: The decoder layer size.
+    - For different datasets, the number of stages, encoder layers, and decoder layers vary. The first parameter of the encoder and the last parameter of the decoder remain consistent, representing the size of the one-hot encoding dimension. Details are listed below:
+  
+      |     | num_stages | encoder_layer | decoder_layer |
+      |-----|------------|---------------|---------------|
+      | LR  | 10         | 16,8,2        | 2,8,16        |
+      | MI  | 6          | 32,8,2        | 2,8,32        |
+      | HCV | 5          | 24,8,2        | 2,8,24        |
 
-  - **--name**: The model name and output directory.
-  - **--exp_path**: The path to the gene expression data.
-  - **--net_path**: The path to the TF-Gene network data.
-  - **--encoder_layer**: The encoder layer size.
-  - **--decoder_layer**: The decoder layer size.
-
+- Step 4: The output files are stored in the "./out/name/" directory.
 
 ## 3.3 Trainnig Data Format
 
@@ -258,7 +283,7 @@ hidden_feats = train_pyg_gcn("experiment", gene_list, features, edge_list, nn.Re
 ```
 
 5\. Project Structure
-
+--------------------------------------
 - **`main.py`**: The main entry point of the application.
 - **`train.py`**: The function to train the model.
 - **`arg_parser.py`**: To parse the command line arguments. 
