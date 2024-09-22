@@ -114,7 +114,7 @@ You can use the DTGN model in two ways:
 
 ## 3.3 Trainnig Data Format
 
-### Gene Expression Data
+### 3.3.1 Gene Expression Data
 
 - **Header Row**: The first row contains the column headers. The first column is geneSymbol, and the subsequent columns are labeled as time1, time2, ..., timeN.
 - **Data Rows**: Each subsequent row represents the expression data for a specific gene at different time points.
@@ -128,7 +128,7 @@ You can use the DTGN model in two ways:
   | ...        | ...   | ...   | ...   | ...   | ... | ...   |
   | gN         | 4.1   | 4.2   | 4.3   | 4.4   | ... | 4.5   |
 
-### TF-Gene Network Data
+### 3.3.2 TF-Gene Network Data
 
 - **Header Row**: The first row contains the column headers: source and target.
 - **Data Rows**: Each subsequent row represents an edge in the network.
@@ -147,7 +147,7 @@ You can use the DTGN model in two ways:
 --------------------------------------
 More detailed information can be found in the documentation comments of the method.
 
-## 4.1. dtgn.preprocessing(name, exp_path, net_path, mean, var, norm_type='id')
+## 4.1 dtgn.preprocessing(name, exp_path, net_path, mean, var, norm_type='id')
 Filter gene expression based on mean and variance to ensure network connectivity.
 
 ### Parameters
@@ -177,7 +177,7 @@ Filter gene expression based on mean and variance to ensure network connectivity
 exp, edges = preprocessing("experiment", "./data/LR/exp.csv", "./data/LR/network.csv", 0.5, 0.1, norm_type='id')
 ```
 
-## 4.2. dtgn.one_hot_encode(feat, num_intervals, origin_val=False)
+## 4.2 dtgn.one_hot_encode(feat, num_intervals, origin_val=False)
 Applies one-hot encoding to represent gene expression data.
 
 ### Parameters
@@ -197,7 +197,7 @@ feat = torch.tensor([[[0.1], [0.5]], [[0.2], [0.8]]])
 one_hot_feat, one_hot_pos = one_hot_encode(feat, 5)
 ```
 
-## 4.3. dtgn.MyGAE(encoder, decoder)
+## 4.3 dtgn.MyGAE(encoder, decoder)
 The DTGN model, a Graph Autoencoder (GAE) for gene expression data.
 
 ### Parameters
@@ -212,7 +212,7 @@ model = MyGAE(encoder, decoder)
 loss = model.total_loss(feat, z, edges)
 ```
 
-## 4.4. dtgn.GCNEncoder(hidden_list, activation=nn.Sigmoid())
+## 4.4 dtgn.GCNEncoder(hidden_list, activation=nn.Sigmoid())
 Graph Convolutional Network (GCN) Encoder.
 
 ### Parameters
@@ -225,7 +225,7 @@ encoder = GCNEncoder([64, 32, 16])
 output = encoder(features, edge_index)
 ```
 
-## 4.5. dtgn.GCNDecoder(hidden_list, activation=nn.Sigmoid())
+## 4.5 dtgn.GCNDecoder(hidden_list, activation=nn.Sigmoid())
 Graph Convolutional Network (GCN) Decoder.
 
 ### Parameters
@@ -238,7 +238,7 @@ decoder = GCNDecoder([16, 32, 64])
 output = decoder(features, edge_index)
 ```
 
-## 4.6. dtgn.get_factor_grn(name, feats, edges, idx2sybol, stage, threshold)
+## 4.6 dtgn.get_factor_grn(name, feats, edges, idx2sybol, stage, threshold)
 Constructs the dynamic TF-Gene network for each stage.
 
 ### Parameters
@@ -257,7 +257,7 @@ Constructs the dynamic TF-Gene network for each stage.
 get_factor_grn("experiment", feats, edges, idx2sybol, 5, 0.05)
 ```
 
-## 4.7. dtgn.train_pyg_gcn(name, genes, feat,edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train)
+## 4.7 dtgn.train_pyg_gcn(name, genes, feat,edges, activation, lr, wd, epochs, device, encoder_layer, decoder_layer, is_train)
 Trains or loads DTGN model using PyTorch Geometric.
 
 ### Parameters
