@@ -1,8 +1,0 @@
-python main.py --name MI1 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,1" --decoder_layer "1,8,32" --device gpu --epochs 3000
-python main.py --name MI2 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,2" --decoder_layer "2,8,32" --device gpu --epochs 3000
-python main.py --name MI4 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,4" --decoder_layer "4,8,32" --device gpu --epochs 3000
-python main.py --name MI6 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,6" --decoder_layer "6,8,32" --device gpu --epochs 3000
-python main.py --name MI8 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,8" --decoder_layer "8,8,32" --device gpu --epochs 3000
-python main.py --name MI10 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,10" --decoder_layer "10,8,32" --device gpu --epochs 3000
-python main.py --name MI12 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,12" --decoder_layer "12,8,32" --device gpu --epochs 3000
-python main.py --name MI16 --mean 0 --var 0 --exp_path "./data/MI/exp.csv" --net_path "./data/MI/network.csv" --encoder_layer "32,8,16" --decoder_layer "16,8,32" --device gpu --epochs 3000

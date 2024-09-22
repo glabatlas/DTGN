@@ -1,8 +1,0 @@
-python main.py --name HCV1 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,1" --decoder_layer "1,8,24" --device gpu --epochs 3000
-python main.py --name HCV2 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,2" --decoder_layer "2,8,24" --device gpu --epochs 3000
-python main.py --name HCV4 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,4" --decoder_layer "4,8,24" --device gpu --epochs 3000
-python main.py --name HCV6 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,6" --decoder_layer "6,8,24" --device gpu --epochs 3000
-python main.py --name HCV8 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,8" --decoder_layer "8,8,24" --device gpu --epochs 3000
-python main.py --name HCV10 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,10" --decoder_layer "10,8,24" --device gpu --epochs 3000
-python main.py --name HCV12 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,12" --decoder_layer "12,8,24" --device gpu --epochs 3000
-python main.py --name HCV16 --mean 0 --var 0 --exp_path "./data/HCV/exp.csv" --net_path "./data/HCV/network.csv" --encoder_layer "24,8,16" --decoder_layer "16,8,24" --device gpu --epochs 3000
