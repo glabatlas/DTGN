@@ -78,10 +78,10 @@ def pathway_roc(dataset, name, stage, type="min"):
 
 
 if __name__ == '__main__':
-    dataset = "LR"
+    dataset = "HCV"
     draw_data = {}
 
-    fpr, tpr, auroc = pathway_roc(dataset, "LR", stage=7, type="min")
+    fpr, tpr, auroc = pathway_roc(dataset, "HCV16", stage=5, type="mean")
     draw_data[f'DTGN: AUC={auroc}'] = (fpr, tpr)
 
     draw_roc(draw_data, title=f"{dataset} KEGG ROC", smooth=False,

@@ -73,7 +73,18 @@ You can use the DTGN model in two ways:
       | MI  | 6          | 32,8,2        | 2,8,32        |
       | HCV | 5          | 24,8,2        | 2,8,24        |
 
-- Step 4: The output files are stored in the "./out/name/" directory.
+- Step 4: Predict the phenotype-specific TFs in each stage
+  ```bash
+  dtgn-tf --name LR --num_stages 10 --permutation_times 10000
+  ```
+  The output files are stored in the "./out/name/" directory.
+  
+- Step 5: Predict the phenotype-specific pathways in each stage
+  ```bash
+  dtgn-pw --dataset LR --name LR --num_stages 10 --permutation_times 2000 --threshold 0.01 --pathway_path "./data/LR/pathways_genes.csv"
+  ```
+  The output files are stored in the "./out/name/" directory.
+
 
 
 ### 3.2.2 Using command line
